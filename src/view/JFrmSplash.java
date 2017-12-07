@@ -5,12 +5,13 @@
  */
 package view;
 
+import controller.FabricaEntityManager;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 /**
  *
- * @author sigaln
+ * @author cadilhe
  */
 public class JFrmSplash extends javax.swing.JFrame {
 
@@ -19,12 +20,19 @@ public class JFrmSplash extends javax.swing.JFrame {
      */
     public JFrmSplash() {
         initComponents();
-
+        
         /**
          * Este método é iniciado com o contrutor e trata a barra de progresso e
          * o carregamento do formulário de login
          */
         carregar();
+        
+        /** 
+         * A Fábrica de EntityManager está sendo chamada aqui para aproveitar o tempo de espera 
+         * do usuário durante o carregamento da barra de progresso. Desta forma, quando ela for
+         * necessária mais para frente, terá sido criada.
+         */        
+        FabricaEntityManager.getEntityManagerFactory();        
     }
     
     // Implementaçao do método carregar
@@ -34,7 +42,7 @@ public class JFrmSplash extends javax.swing.JFrame {
           if (jProgressBar1.getValue() < 100) {
                 jProgressBar1.setValue(jProgressBar1.getValue() + 2);
            } else {
-               t.stop(); // parar a execuçao da barra de progressoz
+               t.stop(); // parar a execuçao da barra de progresso
               JFrmLogin login = new JFrmLogin(); // Instanciar formulário de login
               login.setVisible(true);
               this.setVisible(false); // ocultar este formulario Splash

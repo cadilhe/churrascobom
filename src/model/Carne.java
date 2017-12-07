@@ -22,7 +22,7 @@ import javax.persistence.Transient;
 
 /**
  *
- * @author sigaln
+ * @author cadilhe
  */
 @Entity
 @Table(name = "carne", catalog = "churrascobom", schema = "")
@@ -46,7 +46,7 @@ public class Carne implements Serializable {
     @Column(name = "nome")
     private String nome;
     @Column(name = "unidade")
-    private Integer unidade;
+    private int unidade;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "preco")
     private BigDecimal preco;
@@ -78,12 +78,12 @@ public class Carne implements Serializable {
         changeSupport.firePropertyChange("nome", oldNome, nome);
     }
 
-    public Integer getUnidade() {
+    public int getUnidade() {
         return unidade;
     }
 
-    public void setUnidade(Integer unidade) {
-        Integer oldUnidade = this.unidade;
+    public void setUnidade(int unidade) {
+        int oldUnidade = this.unidade;
         this.unidade = unidade;
         changeSupport.firePropertyChange("unidade", oldUnidade, unidade);
     }

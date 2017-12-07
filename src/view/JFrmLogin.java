@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.FabricaEntityManager;
 import java.util.List;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
@@ -32,7 +33,7 @@ public class JFrmLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        em = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("churrascobomPU").createEntityManager();
+        entityManager = FabricaEntityManager.getEntityManagerFactory().createEntityManager();
         lblControleAcesso = new javax.swing.JLabel();
         jPanelLogin = new javax.swing.JPanel();
         lblSenha = new javax.swing.JLabel();
@@ -144,7 +145,7 @@ public class JFrmLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // O botao ENTRAR aciona uma comsulta ao banco de dados para obter os usuários crdenciados
-        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha");
+        Query query = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha");
         query.setParameter("login", jTextFieldLogin.getText());
         query.setParameter("senha", jPasswordSenha.getText());
         List<Usuario> lista = query.getResultList();
@@ -196,7 +197,7 @@ public class JFrmLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEntrar;
-    private javax.persistence.EntityManager em;
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JPasswordField jPasswordSenha;
     private javax.swing.JTextField jTextFieldLogin;

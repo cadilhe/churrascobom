@@ -52,6 +52,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         btnChurrasco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/churrasco.png"))); // NOI18N
         btnChurrasco.setFocusable(false);
         btnChurrasco.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnChurrasco.setMaximumSize(new java.awt.Dimension(100, 60));
         btnChurrasco.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnChurrasco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,6 +64,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         btnConvidado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/convidado.png"))); // NOI18N
         btnConvidado.setFocusable(false);
         btnConvidado.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnConvidado.setMaximumSize(new java.awt.Dimension(100, 60));
         btnConvidado.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnConvidado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +76,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         btnCarne.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/carne.png"))); // NOI18N
         btnCarne.setFocusable(false);
         btnCarne.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCarne.setMaximumSize(new java.awt.Dimension(100, 60));
         btnCarne.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCarne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +88,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         btnBebida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bebida.png"))); // NOI18N
         btnBebida.setFocusable(false);
         btnBebida.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBebida.setMaximumSize(new java.awt.Dimension(100, 60));
         btnBebida.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnBebida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +101,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         btnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/usuario.png"))); // NOI18N
         btnUsuario.setFocusable(false);
         btnUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUsuario.setMaximumSize(new java.awt.Dimension(100, 60));
         btnUsuario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +113,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_exit.png"))); // NOI18N
         btnSair.setFocusable(false);
         btnSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSair.setMaximumSize(new java.awt.Dimension(100, 60));
         btnSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnSair);
 

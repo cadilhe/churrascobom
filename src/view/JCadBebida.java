@@ -5,15 +5,20 @@
  */
 package view;
 
+import controller.FabricaEntityManager;
 import java.awt.EventQueue;
 import java.beans.Beans;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.persistence.RollbackException;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.Bebida;
 
 /**
  *
@@ -38,7 +43,7 @@ public class JCadBebida extends JPanel {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("churrascobomPU").createEntityManager();
+        entityManager = FabricaEntityManager.getEntityManagerFactory().createEntityManager();
         query = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT b FROM Bebida b");
         list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query.getResultList());
         jPanelCadastroBebidas = new javax.swing.JPanel();
@@ -51,7 +56,8 @@ public class JCadBebida extends JPanel {
         idbebidaLabel = new javax.swing.JLabel();
         descricaoField = new javax.swing.JTextField();
         precoLabel = new javax.swing.JLabel();
-        precoField = new javax.swing.JTextField();
+        precoRenderer1 = new util.PrecoRenderer();
+        jFormattedPrecoBebida = new javax.swing.JFormattedTextField();
         masterScrollPane = new javax.swing.JScrollPane();
         masterTable = new javax.swing.JTable();
         jPanelButtons = new javax.swing.JPanel();
@@ -78,7 +84,7 @@ public class JCadBebida extends JPanel {
         jPanelCadastroBebidasLayout.setVerticalGroup(
             jPanelCadastroBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCadastroBebidasLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblCadastroBebida)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -92,12 +98,17 @@ public class JCadBebida extends JPanel {
         bindingGroup.addBinding(binding);
 
         descricaoLabel.setText("Descriçao");
+        descricaoLabel.setToolTipText("");
+
+        idbebidaField.setEditable(false);
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idbebida}"), idbebidaField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("null");
         bindingGroup.addBinding(binding);
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), idbebidaField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
+
+        idbebidaField.addActionListener(formListener);
 
         nomeLabel.setText("Nome:");
 
@@ -111,11 +122,13 @@ public class JCadBebida extends JPanel {
 
         precoLabel.setText("Preço:");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.preco}"), precoField, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        binding.setSourceUnreadableValue("null");
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.preco}"), jFormattedPrecoBebida, org.jdesktop.beansbinding.BeanProperty.create("value"));
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), precoField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jFormattedPrecoBebida, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
+
+        jFormattedPrecoBebida.addFocusListener(formListener);
+        jFormattedPrecoBebida.addActionListener(formListener);
 
         javax.swing.GroupLayout jPanelCamposLayout = new javax.swing.GroupLayout(jPanelCampos);
         jPanelCampos.setLayout(jPanelCamposLayout);
@@ -124,23 +137,31 @@ public class JCadBebida extends JPanel {
             .addGroup(jPanelCamposLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCamposLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(idbebidaLabel)
-                        .addContainerGap(396, Short.MAX_VALUE))
-                    .addComponent(precoField)
+                    .addComponent(idbebidaField)
+                    .addComponent(nomeField)
                     .addGroup(jPanelCamposLayout.createSequentialGroup()
                         .addGroup(jPanelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelCamposLayout.createSequentialGroup()
-                                .addGroup(jPanelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(precoLabel)
-                                    .addComponent(nomeLabel)
-                                    .addComponent(descricaoLabel))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(idbebidaField)
-                            .addComponent(nomeField)
-                            .addComponent(descricaoField))
-                        .addContainerGap())))
+                            .addComponent(precoLabel)
+                            .addComponent(nomeLabel)
+                            .addComponent(idbebidaLabel))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanelCamposLayout.createSequentialGroup()
+                .addGap(167, 167, 167)
+                .addComponent(precoRenderer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCamposLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFormattedPrecoBebida)
+                .addGap(12, 12, 12))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCamposLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCamposLayout.createSequentialGroup()
+                        .addComponent(descricaoLabel)
+                        .addGap(0, 374, Short.MAX_VALUE))
+                    .addComponent(descricaoField))
+                .addContainerGap())
         );
         jPanelCamposLayout.setVerticalGroup(
             jPanelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,21 +174,24 @@ public class JCadBebida extends JPanel {
                 .addComponent(nomeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(descricaoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(descricaoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(precoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(precoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addComponent(jFormattedPrecoBebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(precoRenderer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, masterTable);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idbebida}"));
-        columnBinding.setColumnName("Idbebida");
+        columnBinding.setColumnName("Código");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
         columnBinding.setColumnName("Nome");
         columnBinding.setColumnClass(String.class);
@@ -175,11 +199,15 @@ public class JCadBebida extends JPanel {
         columnBinding.setColumnName("Descricao");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${preco}"));
-        columnBinding.setColumnName("Preco");
+        columnBinding.setColumnName("Preço");
         columnBinding.setColumnClass(java.math.BigDecimal.class);
         bindingGroup.addBinding(jTableBinding);
-
+        jTableBinding.bind();
+        masterTable.addMouseListener(formListener);
         masterScrollPane.setViewportView(masterTable);
+        if (masterTable.getColumnModel().getColumnCount() > 0) {
+            masterTable.getColumnModel().getColumn(3).setCellRenderer(precoRenderer1);
+        }
 
         deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bebida_remove.png"))); // NOI18N
         deleteButton.setText("Excluir");
@@ -201,7 +229,7 @@ public class JCadBebida extends JPanel {
         refreshButton.addActionListener(formListener);
 
         newButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bebida_add.png"))); // NOI18N
-        newButton.setText("Inserir");
+        newButton.setText("Novo");
         newButton.setInheritsPopupMenu(true);
         newButton.addActionListener(formListener);
 
@@ -269,10 +297,19 @@ public class JCadBebida extends JPanel {
 
     // Code for dispatching events from components to event handlers.
 
-    private class FormListener implements java.awt.event.ActionListener {
+    private class FormListener implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.MouseListener {
         FormListener() {}
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            if (evt.getSource() == saveButton) {
+            if (evt.getSource() == idbebidaField) {
+                JCadBebida.this.idbebidaFieldActionPerformed(evt);
+            }
+            else if (evt.getSource() == jFormattedPrecoBebida) {
+                JCadBebida.this.jFormattedPrecoBebidaActionPerformed(evt);
+            }
+            else if (evt.getSource() == deleteButton) {
+                JCadBebida.this.deleteButtonActionPerformed(evt);
+            }
+            else if (evt.getSource() == saveButton) {
                 JCadBebida.this.saveButtonActionPerformed(evt);
             }
             else if (evt.getSource() == refreshButton) {
@@ -281,9 +318,33 @@ public class JCadBebida extends JPanel {
             else if (evt.getSource() == newButton) {
                 JCadBebida.this.newButtonActionPerformed(evt);
             }
-            else if (evt.getSource() == deleteButton) {
-                JCadBebida.this.deleteButtonActionPerformed(evt);
+        }
+
+        public void focusGained(java.awt.event.FocusEvent evt) {
+        }
+
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            if (evt.getSource() == jFormattedPrecoBebida) {
+                JCadBebida.this.jFormattedPrecoBebidaFocusLost(evt);
             }
+        }
+
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            if (evt.getSource() == masterTable) {
+                JCadBebida.this.masterTableMouseClicked(evt);
+            }
+        }
+
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+        }
+
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+        }
+
+        public void mousePressed(java.awt.event.MouseEvent evt) {
+        }
+
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
         }
     }// </editor-fold>//GEN-END:initComponents
 
@@ -302,10 +363,9 @@ public class JCadBebida extends JPanel {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
 
         // Mensagem de confirmaçao de exclusao de item. 
-        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o regsitro?", "Pergunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Pergunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 
             // Se a opçao do usuário for YES, executar os comandos abaixo.
-            
             int[] selected = masterTable.getSelectedRows(); // Cria um vetor que vai receber as linhas selecionadas
             List<model.Bebida> toRemove = new ArrayList<model.Bebida>(selected.length); // Nova lista das linhas selecionadas
             for (int idx = 0; idx < selected.length; idx++) {
@@ -314,10 +374,10 @@ public class JCadBebida extends JPanel {
                 entityManager.remove(b);
             }
             list.removeAll(toRemove);
-            
+
             saveButton.doClick(); // executa UM click no botao SALVAR
         }
-        
+
         // Se nao
     }//GEN-LAST:event_deleteButtonActionPerformed
 
@@ -335,6 +395,9 @@ public class JCadBebida extends JPanel {
         try {
             entityManager.getTransaction().commit();
             entityManager.getTransaction().begin();
+            // Janela para confirmar o Salvamento            
+            JOptionPane.showMessageDialog(null, "Registro salvo com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
         } catch (RollbackException rex) {
             rex.printStackTrace();
             entityManager.getTransaction().begin();
@@ -347,6 +410,44 @@ public class JCadBebida extends JPanel {
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    private void idbebidaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idbebidaFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idbebidaFieldActionPerformed
+
+    private void jFormattedPrecoBebidaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedPrecoBebidaFocusLost
+        // TODO add your handling code here:
+        // String valor será obtido do campo digitado
+        String sv = jFormattedPrecoBebida.getText();
+        // Faz as devidas substituiçoes e limpeza no texto obtido do usuário 
+        String vsf = sv.replace("R$", "").replace(" ", "").replace(".", "").replace(",", ".");
+        // Um novo objeto da classe BigDecimal é instanciado com o valor da String limpa
+        BigDecimal valor = new BigDecimal(vsf);
+        // Formataçao da moeda para o novo local instanciado com o parametro pt.BR
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valorFormatado = nf.format(valor);
+        jFormattedPrecoBebida.setText(valorFormatado);
+
+        int index = masterTable.getSelectedRow();
+        Bebida b = list.get(index);
+        // passando o valor já como BigDecimal
+        b.setPreco(valor);
+    }//GEN-LAST:event_jFormattedPrecoBebidaFocusLost
+
+// Ao clicar na linha de preço na tabela, exibir o preço formatado para a moeda local no campo de preço
+    private void masterTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_masterTableMouseClicked
+        int row = masterTable.getSelectedRow();
+        if (row >= 0) {
+            NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+            String v = masterTable.getValueAt(row, 3).toString();
+            jFormattedPrecoBebida.setText(nf.format(new BigDecimal(v)));
+        }
+
+    }//GEN-LAST:event_masterTableMouseClicked
+
+    private void jFormattedPrecoBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedPrecoBebidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedPrecoBebidaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
@@ -355,6 +456,7 @@ public class JCadBebida extends JPanel {
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JTextField idbebidaField;
     private javax.swing.JLabel idbebidaLabel;
+    private javax.swing.JFormattedTextField jFormattedPrecoBebida;
     private javax.swing.JPanel jPanelButtons;
     private javax.swing.JPanel jPanelCadastroBebidas;
     private javax.swing.JPanel jPanelCampos;
@@ -365,8 +467,8 @@ public class JCadBebida extends JPanel {
     private javax.swing.JButton newButton;
     private javax.swing.JTextField nomeField;
     private javax.swing.JLabel nomeLabel;
-    private javax.swing.JTextField precoField;
     private javax.swing.JLabel precoLabel;
+    private util.PrecoRenderer precoRenderer1;
     private javax.persistence.Query query;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton saveButton;
@@ -380,7 +482,7 @@ public class JCadBebida extends JPanel {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
