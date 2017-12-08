@@ -51,7 +51,7 @@ public class Carne implements Serializable {
     private String nome;
     
     @Column(name = "unidade")
-    private int unidade;
+    private String unidade;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     
     @Column(name = "preco")
@@ -89,12 +89,12 @@ public class Carne implements Serializable {
         changeSupport.firePropertyChange("nome", oldNome, nome);
     }
 
-    public int getUnidade() {
+    public String getUnidade() {
         return unidade;
     }
 
-    public void setUnidade(int unidade) {
-        int oldUnidade = this.unidade;
+    public void setUnidade(String unidade) {
+        String oldUnidade = this.unidade;
         this.unidade = unidade;
         changeSupport.firePropertyChange("unidade", oldUnidade, unidade);
     }
