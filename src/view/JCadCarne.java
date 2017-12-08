@@ -59,7 +59,6 @@ public class JCadCarne extends JPanel {
         nomeField = new javax.swing.JTextField();
         idcarneLabel = new javax.swing.JLabel();
         jFormattedPrecoCarne = new javax.swing.JFormattedTextField();
-        precoRenderer1 = new util.PrecoRenderer();
         jPanel1 = new javax.swing.JPanel();
         deleteButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
@@ -86,7 +85,7 @@ public class JCadCarne extends JPanel {
         jTableBinding.bind();
         masterScrollPane.setViewportView(masterTable);
         if (masterTable.getColumnModel().getColumnCount() > 0) {
-            masterTable.getColumnModel().getColumn(3).setCellRenderer(precoRenderer1);
+            masterTable.getColumnModel().getColumn(3).setCellRenderer(null);
         }
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/carne_cadastro.png"))); // NOI18N
@@ -171,10 +170,6 @@ public class JCadCarne extends JPanel {
                             .addComponent(nomeField, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                             .addComponent(idcarneField, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFormularioCarneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(precoRenderer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(166, 166, 166))
         );
         jPanelFormularioCarneLayout.setVerticalGroup(
             jPanelFormularioCarneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,9 +190,7 @@ public class JCadCarne extends JPanel {
                 .addGroup(jPanelFormularioCarneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jFormattedPrecoCarne, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(precoLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(precoRenderer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/carne_remove.png"))); // NOI18N
@@ -426,7 +419,6 @@ public class JCadCarne extends JPanel {
     private javax.swing.JTextField nomeField;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JLabel precoLabel;
-    private util.PrecoRenderer precoRenderer1;
     private javax.persistence.Query query;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton saveButton;
