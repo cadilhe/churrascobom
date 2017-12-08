@@ -290,9 +290,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="unidadeField">
           <BindingProperties>
-            <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.unidade}" target="unidadeField" targetPath="text" updateStrategy="0" immediately="false">
-              <Property name="incompletePathValue" type="java.lang.String" value="null"/>
-            </BindingProperty>
+            <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.unidade}" target="unidadeField" targetPath="text" updateStrategy="0" immediately="false"/>
             <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="unidadeField" targetPath="enabled" updateStrategy="1" immediately="false"/>
           </BindingProperties>
         </Component>
@@ -312,7 +310,7 @@
         <Component class="javax.swing.JFormattedTextField" name="jFormattedPrecoCarne">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format subtype="0" type="4"/>
+              <Format format="&#xa4;#,##0" subtype="-1" type="4"/>
             </Property>
           </Properties>
           <BindingProperties>
