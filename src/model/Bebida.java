@@ -9,6 +9,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -41,23 +44,32 @@ public class Bebida implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idbebida")
+    @Column(name = "idbebida")    
     private Integer idbebida;
-    @Column(name = "nome")
+    
+    @Column(name = "nome")    
     private String nome;
-    @Column(name = "descricao")
+    
+    @Column(name = "descricao")    
     private String descricao;
+    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "preco")
+    @Column(name = "preco")    
     private BigDecimal preco;
-
+    
+   // relacionamento de um para muitos entre esta classe e a classe BebidaUtilizada
+    @OneToMany(mappedBy = "bebida")
+    private List<BebidaUtilizada> bebidasUtilizadas = new ArrayList(); 
+    
+    // Construtor
     public Bebida() {
     }
 
     public Bebida(Integer idbebida) {
         this.idbebida = idbebida;
     }
-
+    
+    // Getters e Setters
     public Integer getIdbebida() {
         return idbebida;
     }
@@ -129,6 +141,24 @@ public class Bebida implements Serializable {
 
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
+    }
+    
+    
+    // Métodos específicos de manipulaçao dos objetos da classe BebidaUtilizada    
+    public void addBebidaUtilizada(BebidaUtilizada c){
+        bebidasUtilizadas.add(c);
+    }
+    
+    public void removeBebidaUtilizada(BebidaUtilizada c){
+        bebidasUtilizadas.remove(c);
+    }
+    
+    public BebidaUtilizada getBebidaUtilizada(int index){
+        return bebidasUtilizadas.get(index);
+    }
+    
+    public int sizeOfBebidaUtilizada(){
+        return bebidasUtilizadas.size();
     }
     
 }

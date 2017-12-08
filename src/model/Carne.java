@@ -9,6 +9,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -43,21 +46,29 @@ public class Carne implements Serializable {
     @Basic(optional = false)
     @Column(name = "idcarne")
     private Integer idcarne;
+    
     @Column(name = "nome")
     private String nome;
+    
     @Column(name = "unidade")
     private int unidade;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    
     @Column(name = "preco")
     private BigDecimal preco;
+    
+    @OneToMany(mappedBy = "carne")
+    private List<CarneUtilizada> carnesUtilizadas = new ArrayList();
 
+    // Construtores
     public Carne() {
     }
 
     public Carne(Integer idcarne) {
         this.idcarne = idcarne;
     }
-
+    
+    // Getters e Setters
     public Integer getIdcarne() {
         return idcarne;
     }
@@ -98,6 +109,10 @@ public class Carne implements Serializable {
         changeSupport.firePropertyChange("preco", oldPreco, preco);
     }
 
+    public List<CarneUtilizada> getCarnesUtilizadas() {
+        return carnesUtilizadas;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -130,5 +145,24 @@ public class Carne implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
+    
+    
+    // Métodos específicos de manipulaçao dos objetos da classe CarneUtilizada    
+    public void addCarnesUtilizada(CarneUtilizada c){
+        carnesUtilizadas.add(c);
+    }
+    
+    public void removeChurrasco(CarneUtilizada c){
+        carnesUtilizadas.remove(c);
+    }
+    
+    public CarneUtilizada getCarneUtilizada(int index){
+        return carnesUtilizadas.get(index);
+    }
+    
+    public int sizeOfCarneUtilizada(){
+        return carnesUtilizadas.size();
+    }
+    
     
 }

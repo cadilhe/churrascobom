@@ -8,15 +8,19 @@ package model;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -45,22 +49,41 @@ public class Churrasco implements Serializable {
     @Basic(optional = false)
     @Column(name = "idchurrasco")
     private Integer idchurrasco;
+    
     @Column(name = "data")
     @Temporal(TemporalType.DATE)
     private Date data;
+    
     @Column(name = "hora")
     @Temporal(TemporalType.TIMESTAMP)
     private Date hora;
+    
     @Column(name = "local")
     private String local;
+    
+    // relacionamento de muitos para muitos entre esta classe e a classe Convidado
+    @ManyToMany
+    private List<Convidado> convidados = new ArrayList();
+    
+    // relacionamento de um para muitos entre esta classe e a classe CarneUtilizada
+    @OneToMany(mappedBy = "carne")
+    private List<CarneUtilizada> carnesUtilizadas = new ArrayList();
+    
+    // relacionamento de um para muitos entre esta classe e a classe BebidaUtilizada
+    @OneToMany(mappedBy = "bebida")
+    private List<BebidaUtilizada> bebidasUtilizadas = new ArrayList();
 
+    
+    // Construtores
     public Churrasco() {
     }
 
     public Churrasco(Integer idchurrasco) {
         this.idchurrasco = idchurrasco;
     }
-
+    
+    
+    // Getters e Setters
     public Integer getIdchurrasco() {
         return idchurrasco;
     }
@@ -101,6 +124,27 @@ public class Churrasco implements Serializable {
         changeSupport.firePropertyChange("local", oldLocal, local);
     }
 
+    public List<Convidado> getConvidados() {
+        return convidados;
+    }
+    
+    public List<CarneUtilizada> getCarnesUtilizadas() {
+        return carnesUtilizadas;
+    }
+
+    public void setCarnesUtilizadas(List<CarneUtilizada> carnesUtilizadas) {
+        this.carnesUtilizadas = carnesUtilizadas;
+    }
+
+    public List<BebidaUtilizada> getBebidasUtilizadas() {
+        return bebidasUtilizadas;
+    }
+
+    public void setBebidasUtilizadas(List<BebidaUtilizada> bebidasUtilizadas) {
+        this.bebidasUtilizadas = bebidasUtilizadas;
+    }
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -133,5 +177,63 @@ public class Churrasco implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
+    
+    
+    // Métodos específicos de manipulaçao dos objetos da classe Convidado
+    
+    public void addConvidado(Convidado c){
+        convidados.add(c);
+    }
+    
+    public void removeConvidado(Convidado c){
+        convidados.remove(c);
+    }
+    
+    public Convidado getConvidado(int index){
+        return convidados.get(index);
+    }
+    
+    public int sizeOfConvidado(){
+        return convidados.size();
+    }
+    
+    // Métodos específicos de manipulaçao dos objetos da classe CarneUtilizada
+    
+    public void addCarnesUtilizada(CarneUtilizada c){
+        carnesUtilizadas.add(c);
+    }
+    
+    public void removeCarneUtilizada(CarneUtilizada c){
+        carnesUtilizadas.remove(c);
+    }
+    
+    public CarneUtilizada getCarneUtilizada(int index){
+        return carnesUtilizadas.get(index);
+    }
+    
+    public int sizeOfCarneUtilizada(){
+        return carnesUtilizadas.size();
+    }
+
+    
+    
+    // Métodos específicos de manipulaçao dos objetos da classe BebidaUtilizada
+    
+    public void addBebidaUtilizada(BebidaUtilizada c){
+        bebidasUtilizadas.add(c);
+    }
+    
+    public void removeBebidaUtilizada(BebidaUtilizada c){
+        bebidasUtilizadas.remove(c);
+    }
+    
+    public BebidaUtilizada getBebidaUtilizada(int index){
+        return bebidasUtilizadas.get(index);
+    }
+    
+    public int sizeOfBebidaUtilizada(){
+        return bebidasUtilizadas.size();
+    }
+   
     
 }

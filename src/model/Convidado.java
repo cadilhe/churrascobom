@@ -8,12 +8,15 @@ package model;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -45,6 +48,13 @@ public class Convidado implements Serializable {
     private String nome;
     @Column(name = "telefone")
     private String telefone;
+    
+    /** 
+     * Relacionamento de muitos para muitos entre esta classe e a classe Churrasco
+     * Mapeia esta lista de churrascos com  a lista de convidados criada na classe Churrasco
+     */    
+    @ManyToMany(mappedBy = "convidados") 
+    private List<Churrasco> churrascos = new ArrayList();
 
     public Convidado() {
     }
@@ -83,6 +93,12 @@ public class Convidado implements Serializable {
         changeSupport.firePropertyChange("telefone", oldTelefone, telefone);
     }
 
+    public List<Churrasco> getChurrascos() {
+        return churrascos;
+    }
+    
+      
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -115,5 +131,26 @@ public class Convidado implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
+    
+    
+    // Métodos específicos de manipulaçao dos objetos desta classe
+    
+    public void addChurrasco(Churrasco c){
+        churrascos.add(c);
+    }
+    
+    public void removeChurrasco(Churrasco c){
+        churrascos.remove(c);
+    }
+    
+    public Churrasco getChurrasco(int index){
+        return churrascos.get(index);
+    }
+    
+    public int sizeOfChurrasco(){
+        return churrascos.size();
+    }
+    
+    
     
 }
