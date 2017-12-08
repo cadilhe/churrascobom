@@ -7,6 +7,10 @@ Look and Feel
 https://github.com/khuxtable/seaglass/
 
 
+Separate Code from Swing GUI
+https://stackoverflow.com/questions/44437776/how-to-separate-code-into-classes-for-swing-jframe-application
+
+
 Resetar AUTO_INCREMENT
 
 ALTER TABLE tablename AUTO_INCREMENT = value;
