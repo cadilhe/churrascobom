@@ -16,10 +16,8 @@ public class CarneUtilizada {
     
     @Id
     @GeneratedValue
-    private Integer idCarneUtilizada;
-    
-    private float quantidade;
-    
+    private Integer idCarneUtilizada;    
+    private Float quantidade;    
     private BigDecimal precoItem;
     
     // Relacionamento n:1 
@@ -72,9 +70,9 @@ public class CarneUtilizada {
     }
     
     // Método específico para obter o preço total da bebida utilizada    
-//    public Float getPrecoTotal(){
-//        return precoItem.multiply(new BigDecimal(quantidade.toString())).floatValue();
-//    }
+   public Float getPrecoTotal(){
+        return precoItem.multiply(new BigDecimal(quantidade.toString())).floatValue();
+    }
     
     
     

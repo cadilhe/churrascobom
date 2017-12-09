@@ -44,8 +44,12 @@ public class Convidado implements Serializable {
     @Basic(optional = false)
     @Column(name = "idconvidado")
     private Integer idconvidado;
+    
+    
     @Column(name = "nome")
     private String nome;
+    
+    
     @Column(name = "telefone")
     private String telefone;
     
@@ -56,6 +60,9 @@ public class Convidado implements Serializable {
     @ManyToMany(mappedBy = "convidados") 
     private List<Churrasco> churrascos = new ArrayList();
 
+    
+    // Construtores
+    
     public Convidado() {
     }
 
@@ -63,6 +70,8 @@ public class Convidado implements Serializable {
         this.idconvidado = idconvidado;
     }
 
+   
+    // Getters e Setters
     public Integer getIdconvidado() {
         return idconvidado;
     }
@@ -121,7 +130,8 @@ public class Convidado implements Serializable {
 
     @Override
     public String toString() {
-        return "view.Convidado[ idconvidado=" + idconvidado + " ]";
+        // return "view.Convidado[ idconvidado=" + idconvidado + " ]";
+        return nome; // Exibir apenas o nome no COMBO BOX de JCadChurrasco
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -133,7 +143,7 @@ public class Convidado implements Serializable {
     }
     
     
-    // Métodos específicos de manipulaçao dos objetos desta classe
+    // Métodos específicos de manipulaçao dos objetos da classe Churrasco
     
     public void addChurrasco(Churrasco c){
         churrascos.add(c);

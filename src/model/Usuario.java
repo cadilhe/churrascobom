@@ -24,13 +24,15 @@ import javax.persistence.Transient;
  * @author cadilhe
  */
 @Entity
-@Table(name = "usuario", catalog = "churrascobom", schema = "")
+@Table(name = "usuario")
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
     , @NamedQuery(name = "Usuario.findByIdusuario", query = "SELECT u FROM Usuario u WHERE u.idusuario = :idusuario")
     , @NamedQuery(name = "Usuario.findByNome", query = "SELECT u FROM Usuario u WHERE u.nome = :nome")
     , @NamedQuery(name = "Usuario.findByLogin", query = "SELECT u FROM Usuario u WHERE u.login = :login")
     , @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")})
+
+
 public class Usuario implements Serializable {
 
     @Transient
@@ -42,12 +44,17 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "idusuario")
     private Integer idusuario;
+    
     @Column(name = "nome")
     private String nome;
+    
     @Column(name = "login")
     private String login;
+    
     @Column(name = "senha")
     private String senha;
+    
+    // Construtores
 
     public Usuario() {
     }
@@ -55,6 +62,15 @@ public class Usuario implements Serializable {
     public Usuario(Integer idusuario) {
         this.idusuario = idusuario;
     }
+
+    public Usuario(Integer idusuario, String nome, String login, String senha) {
+        this.idusuario = idusuario;
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
+    }
+    
+    // Getters e Setters
 
     public Integer getIdusuario() {
         return idusuario;

@@ -35,6 +35,8 @@ import javax.persistence.Transient;
     , @NamedQuery(name = "Carne.findByNome", query = "SELECT c FROM Carne c WHERE c.nome = :nome")
     , @NamedQuery(name = "Carne.findByUnidade", query = "SELECT c FROM Carne c WHERE c.unidade = :unidade")
     , @NamedQuery(name = "Carne.findByPreco", query = "SELECT c FROM Carne c WHERE c.preco = :preco")})
+
+
 public class Carne implements Serializable {
 
     @Transient

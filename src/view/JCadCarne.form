@@ -115,7 +115,7 @@
                   <Title/>
                   <Editor/>
                   <Renderer editor="org.netbeans.modules.form.ComponentChooserEditor">
-                    <ComponentRef name="default"/>
+                    <ComponentRef name="precoRenderer1"/>
                   </Renderer>
                 </Column>
               </TableColumnModel>
@@ -137,7 +137,7 @@
               </Subbinding>
               <Subbinding sourcePath="${unidade}">
                 <BindingParameter name="NAME" value="Unidade"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${preco}">
                 <BindingParameter name="NAME" value="Pre&#xe7;o"/>
@@ -204,10 +204,10 @@
                               <Component id="precoLabel" min="-2" max="-2" attributes="0"/>
                               <Component id="unidadeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="unidadeField" pref="337" max="32767" attributes="0"/>
-                              <Component id="jFormattedPrecoCarne" min="-2" pref="333" max="-2" attributes="0"/>
+                              <Component id="unidadeField" pref="377" max="32767" attributes="0"/>
+                              <Component id="jFormattedPrecoCarne" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -217,12 +217,17 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="nomeField" pref="340" max="32767" attributes="0"/>
-                              <Component id="idcarneField" pref="340" max="32767" attributes="0"/>
+                              <Component id="nomeField" pref="380" max="32767" attributes="0"/>
+                              <Component id="idcarneField" pref="380" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="precoRenderer1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -249,7 +254,8 @@
                       <Component id="jFormattedPrecoCarne" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="precoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="41" max="32767" attributes="0"/>
+                  <EmptySpace pref="24" max="32767" attributes="0"/>
+                  <Component id="precoRenderer1" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -303,7 +309,7 @@
         <Component class="javax.swing.JFormattedTextField" name="jFormattedPrecoCarne">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="&#xa4;#,##0" subtype="-1" type="4"/>
+              <Format subtype="0" type="4"/>
             </Property>
           </Properties>
           <BindingProperties>
@@ -313,6 +319,8 @@
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFormattedPrecoCarneFocusLost"/>
           </Events>
+        </Component>
+        <Component class="util.PrecoRenderer" name="precoRenderer1">
         </Component>
       </SubComponents>
     </Container>

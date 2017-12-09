@@ -32,12 +32,14 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "churrasco", catalog = "churrascobom", schema = "")
+
 @NamedQueries({
     @NamedQuery(name = "Churrasco.findAll", query = "SELECT c FROM Churrasco c")
     , @NamedQuery(name = "Churrasco.findByIdchurrasco", query = "SELECT c FROM Churrasco c WHERE c.idchurrasco = :idchurrasco")
     , @NamedQuery(name = "Churrasco.findByData", query = "SELECT c FROM Churrasco c WHERE c.data = :data")
     , @NamedQuery(name = "Churrasco.findByHora", query = "SELECT c FROM Churrasco c WHERE c.hora = :hora")
     , @NamedQuery(name = "Churrasco.findByLocal", query = "SELECT c FROM Churrasco c WHERE c.local = :local")})
+
 public class Churrasco implements Serializable {
 
     @Transient

@@ -305,7 +305,7 @@ public class JCadUsuario extends JPanel {
             entityManager.getTransaction().commit();
             entityManager.getTransaction().begin();
             // Janela para confirmar o Salvamento
-            JOptionPane.showMessageDialog(null, "Registrosalvo com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Registro salvo com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             
         } catch (RollbackException rex) {
             rex.printStackTrace();

@@ -20,6 +20,7 @@ public class BebidaUtilizada {
     private Float quantidade;
     private BigDecimal precoItem;
     
+    // Relacionamento n:1 
     @ManyToOne
     private Churrasco churrasco;
     
