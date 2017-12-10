@@ -68,11 +68,11 @@ public class Churrasco implements Serializable {
     private List<Convidado> convidados = new ArrayList();
     
     // relacionamento de um para muitos entre esta classe e a classe CarneUtilizada
-    @OneToMany(mappedBy = "carne")
+    @OneToMany(mappedBy = "churrasco")
     private List<CarneUtilizada> carnesUtilizadas = new ArrayList();
     
     // relacionamento de um para muitos entre esta classe e a classe BebidaUtilizada
-    @OneToMany(mappedBy = "bebida")
+    @OneToMany(mappedBy = "churrasco")
     private List<BebidaUtilizada> bebidasUtilizadas = new ArrayList();
 
     
