@@ -69,6 +69,16 @@ public class BebidaUtilizada {
         this.bebida = bebida;
     }
     
+    
+    // To String
+
+    @Override
+    public String toString() {
+        return this.bebida.getNome();
+    }
+    
+    
+    
   // Método específico para obter o preço total da bebida utilizada    
     public Float getPrecoTotal(){
         return precoItem.multiply(new BigDecimal(quantidade.toString())).floatValue();

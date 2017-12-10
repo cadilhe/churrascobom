@@ -78,7 +78,7 @@ public class JCadCarne extends JPanel {
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${unidade}"));
         columnBinding.setColumnName("Unidade");
-        columnBinding.setColumnClass(Integer.class);
+        columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${preco}"));
         columnBinding.setColumnName("Preço");
         columnBinding.setColumnClass(java.math.BigDecimal.class);

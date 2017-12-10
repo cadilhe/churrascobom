@@ -169,7 +169,8 @@ public class Churrasco implements Serializable {
 
     @Override
     public String toString() {
-        return "view.Churrasco[ idchurrasco=" + idchurrasco + " ]";
+        // return "view.Churrasco[ idchurrasco=" + idchurrasco + " ]";
+        return local;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

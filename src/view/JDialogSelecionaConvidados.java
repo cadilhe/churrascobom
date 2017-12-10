@@ -5,16 +5,59 @@
  */
 package view;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import model.Convidado;
+
 /**
  *
  * @author sigaln
  */
-public class JFrmConsultaConvidado extends javax.swing.JFrame {
+public class JDialogSelecionaConvidados extends javax.swing.JDialog {
+
+    // Gerar uma propriedade para este form a ser usada na manipulaçao dos Botoes Remover  e Convidar
+    private boolean confirmacao;
+    private Convidado convidado;
+
+    public boolean isConfirmacao() {
+        return confirmacao;
+    }
 
     /**
-     * Creates new form JFrmConsultaConvidado
+     * Alterando o método setter para adicionar suporte a notificaçao de
+     * alteraçoes para todos os componentes das classes e forms e views. Isso
+     * permite a monitoraçao das alteraçoes dos atributos, tornando os nossos
+     * formulários mais dinámicos.
      */
-    public JFrmConsultaConvidado() {
+    public void setConfirmacao(Boolean confirmacao) {
+        Boolean oldConfirmacao = this.confirmacao;
+        this.confirmacao = confirmacao;
+        propertyChangeSupport.firePropertyChange("confirmacao", oldConfirmacao, confirmacao);
+    }
+    
+    public Convidado getConvidado() {
+        return convidado;
+    }
+
+    public void setConvidado(Convidado convidado) {
+        this.convidado = convidado;
+    }
+    
+    private transient final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.removePropertyChangeListener(listener);
+    }
+
+    /**
+     * Creates new form JDialogSelecionaConvidados
+     */
+    public JDialogSelecionaConvidados(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -34,11 +77,11 @@ public class JFrmConsultaConvidado extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextCampoPesquisa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableConsulta = new javax.swing.JTable<>();
-        btnConvidar = new javax.swing.JButton();
+        jTableConsulta = new javax.swing.JTable();
         btnRemover = new javax.swing.JButton();
+        btnConvidar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Digite o nome de convidado");
 
@@ -59,13 +102,26 @@ public class JFrmConsultaConvidado extends javax.swing.JFrame {
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${telefone}"));
         columnBinding.setColumnName("Telefone");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(jTableConsulta);
 
-        btnConvidar.setText("Convidar");
+        btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/op_cancel.png"))); // NOI18N
+        btnRemover.setText("Cancelar");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
-        btnRemover.setText("Remover");
+        btnConvidar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/op_save.png"))); // NOI18N
+        btnConvidar.setText("Confirmar");
+        btnConvidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConvidarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,7 +139,7 @@ public class JFrmConsultaConvidado extends javax.swing.JFrame {
                         .addComponent(btnRemover)
                         .addGap(18, 18, 18)
                         .addComponent(btnConvidar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -104,12 +160,12 @@ public class JFrmConsultaConvidado extends javax.swing.JFrame {
 
         bindingGroup.bind();
 
-        pack();
+        setBounds(0, 0, 770, 389);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextCampoPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCampoPesquisaKeyReleased
-        // TODO add your handling code here: 
-        // Evento: o que acontece qusndo o usuário digita e solta a tecla.        
+        // TODO add your handling code here:
+        // Evento: o que acontece qusndo o usuário digita e solta a tecla.
 
         /**
          * Este métodos implementa a funcionalidade que filtra os nomes dos
@@ -117,7 +173,7 @@ public class JFrmConsultaConvidado extends javax.swing.JFrame {
          * Assim, o método pega da lista de resultados, apenas os nomes
          * semelhantes ao digitado
          */
-        queryConvidados = emConsultaConvidado.createNamedQuery("SELECT c FROM Convidado c WHERE c.nome LIKE :nome ");
+        queryConvidados = emConsultaConvidado.createQuery("SELECT c FROM Convidado c WHERE c.nome LIKE :nome ");
 
         queryConvidados.setParameter("nome", "%" + jTextCampoPesquisa.getText() + "%");
 
@@ -127,8 +183,21 @@ public class JFrmConsultaConvidado extends javax.swing.JFrame {
         // Adiciona na lista de resultado todos os convidados que atendem aos parametros da queryConvidados
         listConvidados.addAll(queryConvidados.getResultList());
 
-
     }//GEN-LAST:event_jTextCampoPesquisaKeyReleased
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        // TODO add your handling code here:
+        // Se a pessoa nao confirmar
+        this.setConfirmacao(false);
+        this.dispose();
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void btnConvidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConvidarActionPerformed
+        // TODO add your handling code here:
+        // Se a pessoa confirmar
+        this.setConfirmacao(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnConvidarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,20 +216,27 @@ public class JFrmConsultaConvidado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrmConsultaConvidado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogSelecionaConvidados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrmConsultaConvidado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogSelecionaConvidados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrmConsultaConvidado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogSelecionaConvidados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrmConsultaConvidado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogSelecionaConvidados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrmConsultaConvidado().setVisible(true);
+                JDialogSelecionaConvidados dialog = new JDialogSelecionaConvidados(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
@@ -171,10 +247,11 @@ public class JFrmConsultaConvidado extends javax.swing.JFrame {
     private javax.persistence.EntityManager emConsultaConvidado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable<model.Convidado> jTableConsulta;
+    private javax.swing.JTable jTableConsulta;
     private javax.swing.JTextField jTextCampoPesquisa;
     private java.util.List<model.Convidado> listConvidados;
     private javax.persistence.Query queryConvidados;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
+   
 }

@@ -132,7 +132,8 @@ public class Bebida implements Serializable {
 
     @Override
     public String toString() {
-        return "view.Bebida[ idbebida=" + idbebida + " ]";
+        // return "view.Bebida[ idbebida=" + idbebida + " ]";
+        return this.nome;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

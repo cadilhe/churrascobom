@@ -28,6 +28,8 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "convidado", catalog = "churrascobom", schema = "")
+
+
 @NamedQueries({
     @NamedQuery(name = "Convidado.findAll", query = "SELECT c FROM Convidado c")
     , @NamedQuery(name = "Convidado.findByIdconvidado", query = "SELECT c FROM Convidado c WHERE c.idconvidado = :idconvidado")
@@ -35,6 +37,10 @@ import javax.persistence.Transient;
     , @NamedQuery(name = "Convidado.findByTelefone", query = "SELECT c FROM Convidado c WHERE c.telefone = :telefone")})
 public class Convidado implements Serializable {
 
+    /*
+    * Os códigos gerados pela IDE, como esse abaixo garantem a comunicaçao entre as classes de modelo e as classes das views
+    * e o design de interfaces e formulários, permitindo a vincluçao de componentes do Swing com o banco de dados
+    */
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
@@ -130,7 +136,7 @@ public class Convidado implements Serializable {
 
     @Override
     public String toString() {
-        // return "view.Convidado[ idconvidado=" + idconvidado + " ]";
+        //return "view.Convidado[ idconvidado=" + idconvidado + " ]";
         return nome; // Exibir apenas o nome no COMBO BOX de JCadChurrasco
     }
 

@@ -1,29 +1,55 @@
-Fontes TTF:
-mistral
-broadway
+Notas sobre alguns recusos do sistema Churrasco Bom
+---------------------------------------------------
 
+Referencias
+-----------
 
-Look and Feel
-https://github.com/khuxtable/seaglass/
-
-Database Test Data
-http://www.databasetestdata.com/
+Hibernate Community Documentation: Capitulo 3. Configuraçao
+https://docs.jboss.org/hibernate/orm/3.3/reference/pt-BR/html/session-configuration.html
 
 
 Separate Code from Swing GUI
 https://stackoverflow.com/questions/44437776/how-to-separate-code-into-classes-for-swing-jframe-application
 
 
-Comandos BásicosResetar
-Resetar AUTO_INCREMENT
-ALTER TABLE tablename AUTO_INCREMENT = value;
-
-
-Referencias
-
 action listener in another class - java
 https://stackoverflow.com/questions/4985507/action-listener-in-another-class-java/4985539#4985539
 
 Dependency injection
 https://en.m.wikipedia.org/wiki/Dependency_injection
+
+
+Como organizar consultas JPQL: Named Queries ou Queries Dinâmicas?
+http://blog.triadworks.com.br/como-organizar-consultas-jpql-named-queries-ou-queries-dinamicas
+
+Dietel & Dietel, Java Como Programar, 10ª ed. Pearson 2016
+
+JPA Query API
+http://www.objectdb.com/java/jpa/query/api
+
+
+Ferramentas
+-----------
+
+Look and Feel
+https://github.com/khuxtable/seaglass/
+
+Geraçao de inserts
+https://www.generatedata.com/
+
+
+Comando Resetar AUTO_INCREMENT
+ALTER TABLE tablename AUTO_INCREMENT = value;
+
+Adicionar colunas na tabela;
+ALTER TABLE users
+ADD COLUMN `count` SMALLINT(6) NOT NULL AFTER `lastname`,
+ADD COLUMN `log` VARCHAR(12) NOT NULL AFTER `count`,
+ADD COLUMN `status` INT(10) UNSIGNED NOT NULL AFTER `log`;
+
+
+TO DO LIST
+- Corrigir Cadastro de usuário - login e senha (Aula 11)
+- Corrigir a Remoçao de Convidados do Churrasco (Aula 20)
+
 

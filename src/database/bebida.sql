@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 09-Dez-2017 às 12:55
+-- Generation Time: 09-Dez-2017 às 14:14
 -- Versão do servidor: 10.1.26-MariaDB
 -- PHP Version: 7.0.22
 
@@ -25,42 +25,43 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `carne`
+-- Estrutura da tabela `bebida`
 --
 
-CREATE TABLE `carne` (
-  `idcarne` int(11) NOT NULL,
+CREATE TABLE `bebida` (
+  `idbebida` int(11) NOT NULL,
+  `descricao` varchar(255) DEFAULT NULL,
   `nome` varchar(255) DEFAULT NULL,
-  `preco` decimal(19,2) DEFAULT NULL,
-  `unidade` varchar(255) DEFAULT NULL
+  `preco` decimal(19,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `carne`
+-- Extraindo dados da tabela `bebida`
 --
 
-INSERT INTO `carne` (`idcarne`, `nome`, `preco`, `unidade`) VALUES
-(1, 'Picanha', '29.00', 'kg');
+INSERT INTO `bebida` (`idbebida`, `descricao`, `nome`, `preco`) VALUES
+(1, 'Black Label', 'Whisky', '134.45'),
+(2, 'Coca Cola', 'Refrigerante', '6.70');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `carne`
+-- Indexes for table `bebida`
 --
-ALTER TABLE `carne`
-  ADD PRIMARY KEY (`idcarne`);
+ALTER TABLE `bebida`
+  ADD PRIMARY KEY (`idbebida`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `carne`
+-- AUTO_INCREMENT for table `bebida`
 --
-ALTER TABLE `carne`
-  MODIFY `idcarne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+ALTER TABLE `bebida`
+  MODIFY `idbebida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

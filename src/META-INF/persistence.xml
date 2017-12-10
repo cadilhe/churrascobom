@@ -3,7 +3,7 @@
   <persistence-unit name="churrascobomPU" transaction-type="RESOURCE_LOCAL">
       
     <!-- Provedor do JPA: Hibernate V 4.2.21 Final
-      https://docs.jboss.org/hibernate/orm/3.3/reference/pt-BR/html/session-configuration.html-->
+      https://docs.jboss.org/hibernate/orm/3.3/reference/pt-BR/html/session-configuration.html -->
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     
     <!-- Classes persistidas -->
@@ -23,10 +23,10 @@
       <property name="javax.persistence.jdbc.password" value="kin132864"/>
       
       <!-- Exibir a saída SQL -->
-      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.show_sql" value="false"/>
       
       <!-- Formatar a saida SQL -->
-      <property name="hibernate.format_sql" value="true"/>
+      <property name="hibernate.format_sql" value="false"/>
       
       <!-- O que fazer com as definiçoes de dados existentes -->
       <property name="hibernate.hbm2ddl.auto" value="update"/>

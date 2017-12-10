@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 09-Dez-2017 às 18:34
+-- Generation Time: 09-Dez-2017 às 15:10
 -- Versão do servidor: 10.1.26-MariaDB
 -- PHP Version: 7.0.22
 
@@ -30,44 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bebida` (
   `idbebida` int(11) NOT NULL,
-  `nome` varchar(255) DEFAULT NULL,
   `descricao` varchar(255) DEFAULT NULL,
+  `nome` varchar(255) DEFAULT NULL,
   `preco` decimal(19,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `bebida`
---
-
-INSERT INTO `bebida` (`idbebida`, `nome`, `descricao`, `preco`) VALUES
-(3, 'Vinho Tinto Seco', 'JP BIB 3l', '33.00'),
-(4, 'Vinho Tinto', 'Merlot BIB 3l', '78.00'),
-(5, 'Vinho Tinto C. Sauvignon', 'BIB 3l', '78.00'),
-(6, 'Whisky Red Label', '750 ml', '125.00'),
-(7, 'Whisky Black Label', '750 ml', '210.00'),
-(8, 'Whisky Jack Daniel’s', '750 ml', '160.00'),
-(9, 'Whisky White House', '750 ml', '98.00'),
-(10, 'Vodka Orloff', '1 L', '35.00'),
-(11, 'Vodka Smirnoff', '1 L', '43.00'),
-(12, 'Vodka Absolut Tradicional', '750 ml', '118.00'),
-(13, 'Vodka Absolut baunilha', '750 ml', '130.00'),
-(14, 'Tequila José Cuervo', '750 ml', '110.00'),
-(15, 'Jeropiga', '970 ml', '30.00'),
-(16, 'Bacardi', '750 ml', '45.00'),
-(17, 'Catuaba Selvagem', '1 L', '18.00'),
-(18, 'Energético Monster', '473 ml', '15.00'),
-(19, 'Energètico Red Nose', '2 L', '18.00'),
-(20, 'Energético red bull', '473 ml', '20.00'),
-(21, 'Cerveja Antarctica sub zero', 'Caixa com 24 unidades 600 ml', '122.00'),
-(22, 'Cerveja Kaiser', 'Caixa com 24 unidades 600 ml', '98.00'),
-(23, 'Cerveja Antárctica', 'Caixa com 24 unidades 600 ml', '125.00'),
-(24, 'Cerveja Skol', 'Caixa com 24 unidades 600 ml', '138.00'),
-(25, 'Cerveja Brahma', 'Caixa com 24 unidades 600 ml', '138.00'),
-(26, 'Coca Cola lata', '350 ml Fardo com 12 unidades. ', '28.00'),
-(27, 'Fanta lata', '350 ml Fardo com 12 unidades ', '28.00'),
-(28, 'Sprite lata', '350 ml Fardo com 12 unidades', '28.00'),
-(29, 'Kuat lata', '350 ml Fardo com 12 unidades', '28.00'),
-(30, 'Guaraná Antarctica', 'lata 350  Fardo com 12 unidades', '27.00');
 
 -- --------------------------------------------------------
 
@@ -329,7 +295,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `bebida`
 --
 ALTER TABLE `bebida`
-  MODIFY `idbebida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `idbebida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `bebidautilizada`
 --
