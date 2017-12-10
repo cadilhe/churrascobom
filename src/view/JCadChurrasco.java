@@ -8,13 +8,18 @@ package view;
 import controller.FabricaEntityManager;
 import java.awt.EventQueue;
 import java.beans.Beans;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.persistence.RollbackException;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.Bebida;
+import model.BebidaUtilizada;
 import model.Churrasco;
 import model.Convidado;
 
@@ -50,8 +55,8 @@ public class JCadChurrasco extends JPanel {
         jTable1 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        queryBebidaUtilizada = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT b FROM BebidaUtilizada b");
-        listBebidaUtilizada = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(queryBebidaUtilizada.getResultList());
+        queryBebida = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT b FROM Bebida b");
+        listBebida = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(queryBebida.getResultList());
         jPanelButtons = new javax.swing.JPanel();
         refreshButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
@@ -83,7 +88,7 @@ public class JCadChurrasco extends JPanel {
         btnMais = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxBebidas = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jFormattedTextFieldQtde = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -393,16 +398,17 @@ public class JCadChurrasco extends JPanel {
 
         jLabel2.setText("Bebida");
 
-        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listBebidaUtilizada, jComboBox1);
+        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listBebida, jComboBoxBebidas);
         bindingGroup.addBinding(jComboBoxBinding);
 
         jLabel3.setText("Quantidade");
 
-        jFormattedTextFieldQtde.setText("jFormattedTextField1");
+        jFormattedTextFieldQtde.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         jLabel4.setText("Preço");
 
-        jFormattedTextFieldPrice.setText("jFormattedTextField1");
+        jFormattedTextFieldPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        jFormattedTextFieldPrice.addFocusListener(formListener);
 
         eLProperty = org.jdesktop.beansbinding.ELProperty.create("${selectedElement.bebidasUtilizadas}");
         jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTableChurrasco, eLProperty, jTableBebidas);
@@ -430,6 +436,7 @@ public class JCadChurrasco extends JPanel {
 
         btnAddBebida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/op_add.png"))); // NOI18N
         btnAddBebida.setText("Adicionar");
+        btnAddBebida.addActionListener(formListener);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -442,7 +449,7 @@ public class JCadChurrasco extends JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -467,7 +474,7 @@ public class JCadChurrasco extends JPanel {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -517,7 +524,7 @@ public class JCadChurrasco extends JPanel {
 
     // Code for dispatching events from components to event handlers.
 
-    private class FormListener implements java.awt.event.ActionListener {
+    private class FormListener implements java.awt.event.ActionListener, java.awt.event.FocusListener {
         FormListener() {}
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             if (evt.getSource() == refreshButton) {
@@ -543,6 +550,18 @@ public class JCadChurrasco extends JPanel {
             }
             else if (evt.getSource() == btnMais) {
                 JCadChurrasco.this.btnMaisActionPerformed(evt);
+            }
+            else if (evt.getSource() == btnAddBebida) {
+                JCadChurrasco.this.btnAddBebidaActionPerformed(evt);
+            }
+        }
+
+        public void focusGained(java.awt.event.FocusEvent evt) {
+        }
+
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            if (evt.getSource() == jFormattedTextFieldPrice) {
+                JCadChurrasco.this.jFormattedTextFieldPriceFocusLost(evt);
             }
         }
     }// </editor-fold>//GEN-END:initComponents
@@ -696,6 +715,56 @@ public class JCadChurrasco extends JPanel {
 
     }//GEN-LAST:event_btnMaisActionPerformed
 
+    private void jFormattedTextFieldPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextFieldPriceFocusLost
+        // TODO add your handling code here:
+        // String valor será obtido do campo digitado
+        String sv = jFormattedTextFieldPrice.getText();
+        // Faz as devidas substituiçoes e limpeza no texto obtido do usuário 
+        String vsf = sv.replace("R$", "").replace(" ", "").replace(".", "").replace(",", ".");
+        // Um novo objeto da classe BigDecimal é instanciado com o valor da String limpa
+        BigDecimal valor = new BigDecimal(vsf);
+        // Formataçao da moeda para o novo local instanciado com o parametro pt.BR
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valorFormatado = nf.format(valor);
+        jFormattedTextFieldPrice.setText(valorFormatado);
+
+//        int index = jTableBebidas.getSelectedRow();
+//        BebidaUtilizada b = listBebidaUtilizada.get(index);
+//        // passando o valor já como BigDecimal
+//        b.setPreco(valor);
+    }//GEN-LAST:event_jFormattedTextFieldPriceFocusLost
+
+    private void btnAddBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBebidaActionPerformed
+        // TODO add your handling code here:
+        
+        /**
+         * O métodos que faz o tratamento de formatos de moeda e adiciona as associaçoes entre Bebida Utiizada e Churrasco 
+         */
+        BebidaUtilizada bebidaUtilizada = new BebidaUtilizada();
+        Bebida bebida = (Bebida) jComboBoxBebidas.getSelectedItem();
+        Long quantidade = (Long) jFormattedTextFieldQtde.getValue();
+        String sv = jFormattedTextFieldPrice.getValue().toString();
+        BigDecimal precoUnitario = new BigDecimal(sv);
+        
+        bebidaUtilizada.setBebida(bebida);
+        bebidaUtilizada.setPrecoItem(precoUnitario);
+        bebidaUtilizada.setQuantidade(quantidade.floatValue());
+        
+        int linhaChurrasco = masterTableChurrasco.getSelectedRow();
+        Churrasco churrasco = listChurrascos.get(linhaChurrasco);
+        
+        churrasco.addBebidaUtilizada(bebidaUtilizada);
+        bebidaUtilizada.setChurrasco(churrasco);
+        
+        entityManager.persist(bebidaUtilizada);
+        
+        atualizarTabelaConvidado(linhaChurrasco);
+        
+        saveButton.doClick();
+
+        
+    }//GEN-LAST:event_btnAddBebidaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddBebida;
@@ -709,7 +778,7 @@ public class JCadChurrasco extends JPanel {
     private javax.swing.JLabel horaLabel;
     private javax.swing.JTextField idchurrascoField;
     private javax.swing.JLabel idchurrascoLabel;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxBebidas;
     private javax.swing.JComboBox jComboBoxConvidados;
     private javax.swing.JFormattedTextField jFormattedData;
     private javax.swing.JFormattedTextField jFormattedHora;
@@ -735,7 +804,7 @@ public class JCadChurrasco extends JPanel {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTableBebidas;
     private javax.swing.JTable jTableConvidadosChurrasco;
-    private java.util.List<model.BebidaUtilizada> listBebidaUtilizada;
+    private java.util.List<model.Bebida> listBebida;
     private java.util.List<model.Churrasco> listChurrascos;
     private java.util.List<model.Convidado> listConvidados;
     private javax.swing.JTextField localField;
@@ -743,7 +812,7 @@ public class JCadChurrasco extends JPanel {
     private javax.swing.JScrollPane masterScrollPaneTabelaChurrasco;
     private javax.swing.JTable masterTableChurrasco;
     private javax.swing.JButton newButton;
-    private javax.persistence.Query queryBebidaUtilizada;
+    private javax.persistence.Query queryBebida;
     private javax.persistence.Query queryChurrasco;
     private javax.persistence.Query queryConvidados;
     private javax.swing.JButton refreshButton;
