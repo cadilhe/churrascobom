@@ -42,7 +42,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMenuCarne = new javax.swing.JMenuItem();
         jMenuBebida = new javax.swing.JMenuItem();
         jMenUsuario = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuChurrasco = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
@@ -154,8 +154,13 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
         JMenuPrincipal.add(jMenu1);
 
-        jMenu2.setText("Churrasco");
-        JMenuPrincipal.add(jMenu2);
+        jMenuChurrasco.setText("Churrasco");
+        jMenuChurrasco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuChurrascoActionPerformed(evt);
+            }
+        });
+        JMenuPrincipal.add(jMenuChurrasco);
 
         setJMenuBar(JMenuPrincipal);
 
@@ -227,6 +232,11 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         JCadUsuario.main(null);
     }//GEN-LAST:event_jMenUsuarioActionPerformed
 
+    private void jMenuChurrascoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuChurrascoActionPerformed
+        // TODO add your handling code here:
+        JCadChurrasco.main(null);
+    }//GEN-LAST:event_jMenuChurrascoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -266,9 +276,9 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar JMenuPrincipal;
     private javax.swing.JMenuItem jMenUsuario;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuBebida;
     private javax.swing.JMenuItem jMenuCarne;
+    private javax.swing.JMenu jMenuChurrasco;
     private javax.swing.JMenuItem jMenuConvidado;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;

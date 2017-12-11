@@ -12,11 +12,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -64,7 +67,7 @@ public class Churrasco implements Serializable {
     private String local;
     
     // relacionamento de muitos para muitos entre esta classe e a classe Convidado
-    @ManyToMany
+    @ManyToMany 
     private List<Convidado> convidados = new ArrayList();
     
     // relacionamento de um para muitos entre esta classe e a classe CarneUtilizada
@@ -74,6 +77,14 @@ public class Churrasco implements Serializable {
     // relacionamento de um para muitos entre esta classe e a classe BebidaUtilizada
     @OneToMany(mappedBy = "churrasco")
     private List<BebidaUtilizada> bebidasUtilizadas = new ArrayList();
+    
+    
+//    @OneToMany(
+//		mappedBy = "country",
+//		fetch = FetchType.LAZY,
+//		targetEntity = State.class,
+//		cascade = CascadeType.ALL)
+//	private final List<State> states = new ArrayList<State>();
 
     
     // Construtores

@@ -163,7 +163,7 @@
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jFormattedPrecoBebida" max="32767" attributes="0"/>
+                  <Component id="jftxtPrice" max="32767" attributes="0"/>
                   <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
@@ -197,7 +197,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="precoLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jFormattedPrecoBebida" min="-2" max="-2" attributes="0"/>
+                  <Component id="jftxtPrice" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                   <Component id="precoRenderer1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -208,10 +208,10 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="nomeField">
           <BindingProperties>
-            <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.nome}" target="nomeField" targetPath="text" updateStrategy="0" immediately="false">
+            <BindingProperty name="text" source="jtblBebidas" sourcePath="${selectedElement.nome}" target="nomeField" targetPath="text" updateStrategy="0" immediately="false">
               <Property name="incompletePathValue" type="java.lang.String" value="null"/>
             </BindingProperty>
-            <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="nomeField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+            <BindingProperty name="enabled" source="jtblBebidas" sourcePath="${selectedElement != null}" target="nomeField" targetPath="enabled" updateStrategy="1" immediately="false"/>
           </BindingProperties>
         </Component>
         <Component class="javax.swing.JLabel" name="descricaoLabel">
@@ -225,10 +225,10 @@
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.idbebida}" target="idbebidaField" targetPath="text" updateStrategy="0" immediately="false">
+            <BindingProperty name="text" source="jtblBebidas" sourcePath="${selectedElement.idbebida}" target="idbebidaField" targetPath="text" updateStrategy="0" immediately="false">
               <Property name="incompletePathValue" type="java.lang.String" value="null"/>
             </BindingProperty>
-            <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="idbebidaField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+            <BindingProperty name="enabled" source="jtblBebidas" sourcePath="${selectedElement != null}" target="idbebidaField" targetPath="enabled" updateStrategy="1" immediately="false"/>
           </BindingProperties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idbebidaFieldActionPerformed"/>
@@ -246,10 +246,10 @@
         </Component>
         <Component class="javax.swing.JTextField" name="descricaoField">
           <BindingProperties>
-            <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.descricao}" target="descricaoField" targetPath="text" updateStrategy="0" immediately="false">
+            <BindingProperty name="text" source="jtblBebidas" sourcePath="${selectedElement.descricao}" target="descricaoField" targetPath="text" updateStrategy="0" immediately="false">
               <Property name="incompletePathValue" type="java.lang.String" value="null"/>
             </BindingProperty>
-            <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="descricaoField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+            <BindingProperty name="enabled" source="jtblBebidas" sourcePath="${selectedElement != null}" target="descricaoField" targetPath="enabled" updateStrategy="1" immediately="false"/>
           </BindingProperties>
         </Component>
         <Component class="javax.swing.JLabel" name="precoLabel">
@@ -259,19 +259,19 @@
         </Component>
         <Component class="util.PrecoRenderer" name="precoRenderer1">
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedPrecoBebida">
+        <Component class="javax.swing.JFormattedTextField" name="jftxtPrice">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format subtype="0" type="4"/>
             </Property>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="value" source="masterTable" sourcePath="${selectedElement.preco}" target="jFormattedPrecoBebida" targetPath="value" updateStrategy="0" immediately="false"/>
-            <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="jFormattedPrecoBebida" targetPath="enabled" updateStrategy="0" immediately="false"/>
+            <BindingProperty name="value" source="jtblBebidas" sourcePath="${selectedElement.preco}" target="jftxtPrice" targetPath="value" updateStrategy="0" immediately="false"/>
+            <BindingProperty name="enabled" source="jtblBebidas" sourcePath="${selectedElement != null}" target="jftxtPrice" targetPath="enabled" updateStrategy="0" immediately="false"/>
           </BindingProperties>
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFormattedPrecoBebidaFocusLost"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedPrecoBebidaActionPerformed"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jftxtPriceFocusLost"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jftxtPriceActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -283,7 +283,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="masterTable">
+        <Component class="javax.swing.JTable" name="jtblBebidas">
           <Properties>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
@@ -316,7 +316,7 @@
             </Property>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="elements" source="list" target="masterTable" targetPath="elements" updateStrategy="0" immediately="true">
+            <BindingProperty name="elements" source="list" target="jtblBebidas" targetPath="elements" updateStrategy="0" immediately="true">
               <Subbinding sourcePath="${idbebida}">
                 <BindingParameter name="NAME" value="C&#xf3;digo"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
@@ -337,7 +337,7 @@
             </BindingProperty>
           </BindingProperties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="masterTableMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtblBebidasMouseClicked"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
@@ -393,7 +393,7 @@
             <Property name="inheritsPopupMenu" type="boolean" value="true"/>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="deleteButton" targetPath="enabled" updateStrategy="1" immediately="false"/>
+            <BindingProperty name="enabled" source="jtblBebidas" sourcePath="${selectedElement != null}" target="deleteButton" targetPath="enabled" updateStrategy="1" immediately="false"/>
           </BindingProperties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>

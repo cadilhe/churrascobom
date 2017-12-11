@@ -35,26 +35,24 @@ import javax.persistence.Transient;
     , @NamedQuery(name = "Bebida.findByNome", query = "SELECT b FROM Bebida b WHERE b.nome = :nome")
     , @NamedQuery(name = "Bebida.findByDescricao", query = "SELECT b FROM Bebida b WHERE b.descricao = :descricao")
     , @NamedQuery(name = "Bebida.findByPreco", query = "SELECT b FROM Bebida b WHERE b.preco = :preco")})
+
 public class Bebida implements Serializable {
 
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idbebida")    
-    private Integer idbebida;
-    
-    @Column(name = "nome")    
-    private String nome;
-    
-    @Column(name = "descricao")    
-    private String descricao;
-    
+    @Column(name = "idbebida")
+    private Integer idbebida;    
+    @Column(name = "nome")
+    private String nome;    
+    @Column(name = "descricao")
+    private String descricao;    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "preco")    
+    @Column(name = "preco")
     private BigDecimal preco;
     
    // relacionamento de um para muitos entre esta classe e a classe BebidaUtilizada
@@ -135,7 +133,9 @@ public class Bebida implements Serializable {
         // return "view.Bebida[ idbebida=" + idbebida + " ]";
         return this.nome;
     }
-
+    
+    
+    // Métodos de sincronizaçao entre os models e views da interface gráfica
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);
     }

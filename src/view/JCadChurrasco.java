@@ -34,6 +34,9 @@ public class JCadChurrasco extends JPanel {
         if (!Beans.isDesignTime()) {
             entityManager.getTransaction().begin();
         }
+        jTabbedPane1.setEnabledAt(1, false);
+        jTabbedPane1.setEnabledAt(2, false);
+        jTabbedPane1.setEnabledAt(3, false);
     }
 
     /**
@@ -49,82 +52,63 @@ public class JCadChurrasco extends JPanel {
         entityManager = FabricaEntityManager.getEntityManagerFactory().createEntityManager();
         queryChurrasco = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Churrasco c");
         listChurrascos = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(queryChurrasco.getResultList());
-        queryConvidados = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("select c from Convidado c");
-        listConvidados = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(queryConvidados.getResultList());
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        queryConvidado = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("select c from Convidado c");
+        listConvidados = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(queryConvidado.getResultList());
         queryBebida = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT b FROM Bebida b");
-        listBebida = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(queryBebida.getResultList());
-        jPanelButtons = new javax.swing.JPanel();
+        listBebidas = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(queryBebida.getResultList());
+        queryCarne = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Carne c");
+        listCarnes = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(queryCarne.getResultList());
+        jpnButtons = new javax.swing.JPanel();
         refreshButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        jPanelHeaderTitle = new javax.swing.JPanel();
-        jLabelLogo = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanelFormTabela = new javax.swing.JPanel();
-        jPanelFormularioCadastroChurrasco = new javax.swing.JPanel();
-        idchurrascoLabel = new javax.swing.JLabel();
-        idchurrascoField = new javax.swing.JTextField();
-        dataLabel = new javax.swing.JLabel();
-        horaLabel = new javax.swing.JLabel();
-        localLabel = new javax.swing.JLabel();
-        localField = new javax.swing.JTextField();
-        jFormattedData = new javax.swing.JFormattedTextField();
-        jFormattedHora = new javax.swing.JFormattedTextField();
+        jpnChurrasco = new javax.swing.JPanel();
+        lblIdchurrasco = new javax.swing.JLabel();
+        txtIdchurrasco = new javax.swing.JTextField();
+        lblData = new javax.swing.JLabel();
+        lblHora = new javax.swing.JLabel();
+        lblLocal = new javax.swing.JLabel();
+        txtLocal = new javax.swing.JTextField();
+        ftxtData = new javax.swing.JFormattedTextField();
+        ftxtHora = new javax.swing.JFormattedTextField();
         timeRenderer1 = new util.TimeRenderer();
-        masterScrollPaneTabelaChurrasco = new javax.swing.JScrollPane();
-        masterTableChurrasco = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBoxConvidados = new javax.swing.JComboBox();
+        scrollPaneChurrasco = new javax.swing.JScrollPane();
+        tblChurrascos = new javax.swing.JTable();
+        jpnConvidados = new javax.swing.JPanel();
+        lblSelecione = new javax.swing.JLabel();
+        cbxConvidados = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableConvidadosChurrasco = new javax.swing.JTable();
+        tblConvidados = new javax.swing.JTable();
         btnRemoveConvidado = new javax.swing.JButton();
-        btnConvidar = new javax.swing.JButton();
-        btnMais = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBoxBebidas = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jFormattedTextFieldQtde = new javax.swing.JFormattedTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jFormattedTextFieldPrice = new javax.swing.JFormattedTextField();
+        btnAddConvidado = new javax.swing.JButton();
+        jpnBebidas = new javax.swing.JPanel();
+        lblSelectBebida = new javax.swing.JLabel();
+        cbxBebidas = new javax.swing.JComboBox<>();
+        lblQtde = new javax.swing.JLabel();
+        ftxtQtde = new javax.swing.JFormattedTextField();
+        lblPreco = new javax.swing.JLabel();
+        jftxtPrice = new javax.swing.JFormattedTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTableBebidas = new javax.swing.JTable();
+        tblBebidas = new javax.swing.JTable();
         btnRemoveBebida = new javax.swing.JButton();
         btnAddBebida = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        lblSelectCarne = new javax.swing.JLabel();
+        cbxCarnes = new javax.swing.JComboBox<>();
+        lblQtde1 = new javax.swing.JLabel();
+        ftxtQtdeCarne = new javax.swing.JFormattedTextField();
+        jftxtPriceCarne = new javax.swing.JFormattedTextField();
+        lblPriceCarne = new javax.swing.JLabel();
+        btnRemoveCarne = new javax.swing.JButton();
+        btnAddCarne = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblCarnes = new javax.swing.JTable();
+        precoRenderer1 = new util.PrecoRenderer();
+        jlbllogo = new javax.swing.JLabel();
 
         FormListener formListener = new FormListener();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(jTable2);
 
         refreshButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/churrasco_cancel.png"))); // NOI18N
         refreshButton.setText("Cancelar");
@@ -141,18 +125,18 @@ public class JCadChurrasco extends JPanel {
         deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/churrasco_remove.png"))); // NOI18N
         deleteButton.setText("Excluir");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTableChurrasco, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), deleteButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, tblChurrascos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), deleteButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         deleteButton.addActionListener(formListener);
 
-        javax.swing.GroupLayout jPanelButtonsLayout = new javax.swing.GroupLayout(jPanelButtons);
-        jPanelButtons.setLayout(jPanelButtonsLayout);
-        jPanelButtonsLayout.setHorizontalGroup(
-            jPanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelButtonsLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpnButtonsLayout = new javax.swing.GroupLayout(jpnButtons);
+        jpnButtons.setLayout(jpnButtonsLayout);
+        jpnButtonsLayout.setHorizontalGroup(
+            jpnButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnButtonsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpnButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(newButton)
                     .addComponent(deleteButton)
                     .addComponent(refreshButton)
@@ -160,11 +144,11 @@ public class JCadChurrasco extends JPanel {
                 .addContainerGap())
         );
 
-        jPanelButtonsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteButton, newButton, refreshButton, saveButton});
+        jpnButtonsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteButton, newButton, refreshButton, saveButton});
 
-        jPanelButtonsLayout.setVerticalGroup(
-            jPanelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelButtonsLayout.createSequentialGroup()
+        jpnButtonsLayout.setVerticalGroup(
+            jpnButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnButtonsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(newButton)
                 .addGap(8, 8, 8)
@@ -176,158 +160,126 @@ public class JCadChurrasco extends JPanel {
                 .addContainerGap())
         );
 
-        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/churrasco_cadastro.png"))); // NOI18N
+        lblIdchurrasco.setText("Código:");
 
-        javax.swing.GroupLayout jPanelHeaderTitleLayout = new javax.swing.GroupLayout(jPanelHeaderTitle);
-        jPanelHeaderTitle.setLayout(jPanelHeaderTitleLayout);
-        jPanelHeaderTitleLayout.setHorizontalGroup(
-            jPanelHeaderTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHeaderTitleLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelLogo)
-                .addGap(274, 274, 274))
-        );
-        jPanelHeaderTitleLayout.setVerticalGroup(
-            jPanelHeaderTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelHeaderTitleLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelLogo)
-                .addContainerGap())
-        );
+        txtIdchurrasco.setEditable(false);
 
-        idchurrascoLabel.setText("Código:");
-
-        idchurrascoField.setEditable(false);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTableChurrasco, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idchurrasco}"), idchurrascoField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblChurrascos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idchurrasco}"), txtIdchurrasco, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("null");
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTableChurrasco, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), idchurrascoField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
 
-        dataLabel.setText("Data:");
+        lblData.setText("Data:");
 
-        horaLabel.setText("Hora:");
+        lblHora.setText("Hora:");
 
-        localLabel.setText("Local:");
+        lblLocal.setText("Local:");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTableChurrasco, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.local}"), localField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblChurrascos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.local}"), txtLocal, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("null");
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTableChurrasco, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), localField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, tblChurrascos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), txtLocal, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        jFormattedData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        ftxtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTableChurrasco, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.data}"), jFormattedData, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblChurrascos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.data}"), ftxtData, org.jdesktop.beansbinding.BeanProperty.create("value"));
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTableChurrasco, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jFormattedData, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        jFormattedHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTableChurrasco, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.hora}"), jFormattedHora, org.jdesktop.beansbinding.BeanProperty.create("value"));
-        bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTableChurrasco, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jFormattedHora, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblChurrascos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), ftxtData, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        jFormattedHora.addActionListener(formListener);
+        ftxtHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
-        javax.swing.GroupLayout jPanelFormularioCadastroChurrascoLayout = new javax.swing.GroupLayout(jPanelFormularioCadastroChurrasco);
-        jPanelFormularioCadastroChurrasco.setLayout(jPanelFormularioCadastroChurrascoLayout);
-        jPanelFormularioCadastroChurrascoLayout.setHorizontalGroup(
-            jPanelFormularioCadastroChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFormularioCadastroChurrascoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelFormularioCadastroChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(idchurrascoLabel)
-                    .addComponent(dataLabel)
-                    .addComponent(horaLabel)
-                    .addComponent(localLabel))
-                .addGap(24, 24, 24)
-                .addGroup(jPanelFormularioCadastroChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(localField)
-                    .addComponent(idchurrascoField)
-                    .addComponent(jFormattedData)
-                    .addComponent(jFormattedHora)))
-            .addGroup(jPanelFormularioCadastroChurrascoLayout.createSequentialGroup()
-                .addGap(247, 247, 247)
-                .addComponent(timeRenderer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(399, Short.MAX_VALUE))
-        );
-        jPanelFormularioCadastroChurrascoLayout.setVerticalGroup(
-            jPanelFormularioCadastroChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFormularioCadastroChurrascoLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanelFormularioCadastroChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idchurrascoLabel)
-                    .addComponent(idchurrascoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelFormularioCadastroChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dataLabel)
-                    .addComponent(jFormattedData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelFormularioCadastroChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(horaLabel)
-                    .addComponent(jFormattedHora, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelFormularioCadastroChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(localLabel)
-                    .addComponent(localField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(timeRenderer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblChurrascos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.hora}"), ftxtHora, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblChurrascos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), ftxtHora, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listChurrascos, masterTableChurrasco);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listChurrascos, tblChurrascos);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idchurrasco}"));
         columnBinding.setColumnName("Código");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${local}"));
+        columnBinding.setColumnName("Local");
+        columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${data}"));
         columnBinding.setColumnName("Data");
         columnBinding.setColumnClass(java.util.Date.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${hora}"));
         columnBinding.setColumnName("Hora");
         columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${local}"));
-        columnBinding.setColumnName("Local");
-        columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-        masterScrollPaneTabelaChurrasco.setViewportView(masterTableChurrasco);
-        if (masterTableChurrasco.getColumnModel().getColumnCount() > 0) {
-            masterTableChurrasco.getColumnModel().getColumn(2).setCellRenderer(timeRenderer1);
+        tblChurrascos.addMouseListener(formListener);
+        scrollPaneChurrasco.setViewportView(tblChurrascos);
+        if (tblChurrascos.getColumnModel().getColumnCount() > 0) {
+            tblChurrascos.getColumnModel().getColumn(3).setCellRenderer(timeRenderer1);
         }
 
-        javax.swing.GroupLayout jPanelFormTabelaLayout = new javax.swing.GroupLayout(jPanelFormTabela);
-        jPanelFormTabela.setLayout(jPanelFormTabelaLayout);
-        jPanelFormTabelaLayout.setHorizontalGroup(
-            jPanelFormTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFormTabelaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelFormTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelFormularioCadastroChurrasco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(masterScrollPaneTabelaChurrasco, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE))
-                .addContainerGap())
+        javax.swing.GroupLayout jpnChurrascoLayout = new javax.swing.GroupLayout(jpnChurrasco);
+        jpnChurrasco.setLayout(jpnChurrascoLayout);
+        jpnChurrascoLayout.setHorizontalGroup(
+            jpnChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnChurrascoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpnChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPaneChurrasco, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                    .addGroup(jpnChurrascoLayout.createSequentialGroup()
+                        .addGroup(jpnChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIdchurrasco)
+                            .addComponent(lblData)
+                            .addComponent(lblHora)
+                            .addComponent(lblLocal))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpnChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtLocal)
+                            .addComponent(ftxtHora, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtIdchurrasco, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ftxtData, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jpnChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpnChurrascoLayout.createSequentialGroup()
+                    .addGap(253, 253, 253)
+                    .addComponent(timeRenderer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(417, Short.MAX_VALUE)))
         );
-        jPanelFormTabelaLayout.setVerticalGroup(
-            jPanelFormTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFormTabelaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelFormularioCadastroChurrasco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(masterScrollPaneTabelaChurrasco, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        jpnChurrascoLayout.setVerticalGroup(
+            jpnChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnChurrascoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpnChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblIdchurrasco)
+                    .addComponent(txtIdchurrasco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(jpnChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblData)
+                    .addComponent(ftxtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpnChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblHora)
+                    .addComponent(ftxtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpnChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLocal)
+                    .addComponent(txtLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(scrollPaneChurrasco, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jpnChurrascoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpnChurrascoLayout.createSequentialGroup()
+                    .addContainerGap(255, Short.MAX_VALUE)
+                    .addComponent(timeRenderer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(131, 131, 131)))
         );
 
-        jTabbedPane1.addTab("Dados do Churrasco", jPanelFormTabela);
+        jTabbedPane1.addTab("Dados do Churrasco", jpnChurrasco);
 
-        jLabel1.setText("Selecione o convidado");
+        lblSelecione.setText("Selecione o convidado");
 
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listConvidados, jComboBoxConvidados);
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listConvidados, cbxConvidados);
         bindingGroup.addBinding(jComboBoxBinding);
 
         org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${selectedElement.convidados}");
-        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTableChurrasco, eLProperty, jTableConvidadosChurrasco);
+        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblChurrascos, eLProperty, tblConvidados);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
         columnBinding.setColumnName("Nome");
         columnBinding.setColumnClass(String.class);
@@ -339,150 +291,146 @@ public class JCadChurrasco extends JPanel {
         columnBinding.setColumnClass(java.util.List.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-        jScrollPane1.setViewportView(jTableConvidadosChurrasco);
+        jScrollPane1.setViewportView(tblConvidados);
 
         btnRemoveConvidado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/op_remove.png"))); // NOI18N
         btnRemoveConvidado.setText("Remover");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblConvidados, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), btnRemoveConvidado, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         btnRemoveConvidado.addActionListener(formListener);
 
-        btnConvidar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/op_save.png"))); // NOI18N
-        btnConvidar.setText("Convidar");
-        btnConvidar.addActionListener(formListener);
+        btnAddConvidado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/op_save.png"))); // NOI18N
+        btnAddConvidado.setText("Convidar");
+        btnAddConvidado.addActionListener(formListener);
 
-        btnMais.setText("...");
-        btnMais.addActionListener(formListener);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpnConvidadosLayout = new javax.swing.GroupLayout(jpnConvidados);
+        jpnConvidados.setLayout(jpnConvidadosLayout);
+        jpnConvidadosLayout.setHorizontalGroup(
+            jpnConvidadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnConvidadosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpnConvidadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                    .addGroup(jpnConvidadosLayout.createSequentialGroup()
+                        .addComponent(lblSelecione)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnConvidadosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 432, Short.MAX_VALUE)
+                        .addComponent(btnRemoveConvidado)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAddConvidado))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnConvidadosLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBoxConvidados, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)
-                                .addComponent(btnMais))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnRemoveConvidado)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnConvidar)))))
+                        .addComponent(cbxConvidados, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jpnConvidadosLayout.setVerticalGroup(
+            jpnConvidadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnConvidadosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblSelecione)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMais, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBoxConvidados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cbxConvidados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpnConvidadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRemoveConvidado)
-                    .addComponent(btnConvidar))
+                    .addComponent(btnAddConvidado))
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Convidados", jPanel1);
+        jTabbedPane1.addTab("Convidados", jpnConvidados);
 
-        jLabel2.setText("Bebida");
+        lblSelectBebida.setText("Bebida");
 
-        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listBebida, jComboBoxBebidas);
+        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listBebidas, cbxBebidas);
         bindingGroup.addBinding(jComboBoxBinding);
 
-        jLabel3.setText("Quantidade");
+        lblQtde.setText("Quantidade");
 
-        jFormattedTextFieldQtde.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        ftxtQtde.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
-        jLabel4.setText("Preço");
+        lblPreco.setText("Preço");
 
-        jFormattedTextFieldPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
-        jFormattedTextFieldPrice.addFocusListener(formListener);
+        jftxtPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        jftxtPrice.addFocusListener(formListener);
 
         eLProperty = org.jdesktop.beansbinding.ELProperty.create("${selectedElement.bebidasUtilizadas}");
-        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTableChurrasco, eLProperty, jTableBebidas);
+        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblChurrascos, eLProperty, tblBebidas);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idBebidaUtilizada}"));
-        columnBinding.setColumnName("Código");
+        columnBinding.setColumnName("Id Bebida Utilizada");
         columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bebida}"));
         columnBinding.setColumnName("Bebida");
         columnBinding.setColumnClass(model.Bebida.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bebida.preco}"));
-        columnBinding.setColumnName("Preço");
-        columnBinding.setColumnClass(java.math.BigDecimal.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${quantidade}"));
-        columnBinding.setColumnName("Qtde");
+        columnBinding.setColumnName("Quantidade");
         columnBinding.setColumnClass(Float.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${precoTotal}"));
-        columnBinding.setColumnName("Preço Total");
+        columnBinding.setColumnName("Preco Total");
         columnBinding.setColumnClass(Float.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-        jScrollPane4.setViewportView(jTableBebidas);
+        jScrollPane4.setViewportView(tblBebidas);
 
         btnRemoveBebida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/op_remove.png"))); // NOI18N
         btnRemoveBebida.setText("Remover");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblBebidas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), btnRemoveBebida, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
 
         btnAddBebida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/op_add.png"))); // NOI18N
         btnAddBebida.setText("Adicionar");
         btnAddBebida.addActionListener(formListener);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpnBebidasLayout = new javax.swing.GroupLayout(jpnBebidas);
+        jpnBebidas.setLayout(jpnBebidasLayout);
+        jpnBebidasLayout.setHorizontalGroup(
+            jpnBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnBebidasLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpnBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jComboBoxBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                    .addGroup(jpnBebidasLayout.createSequentialGroup()
+                        .addGroup(jpnBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSelectBebida)
+                            .addComponent(cbxBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpnBebidasLayout.createSequentialGroup()
+                                .addComponent(lblQtde)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextFieldQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(ftxtQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnBebidasLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                        .addGroup(jpnBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnBebidasLayout.createSequentialGroup()
+                                .addComponent(lblPreco)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jftxtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnBebidasLayout.createSequentialGroup()
                                 .addComponent(btnRemoveBebida)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnAddBebida)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jpnBebidasLayout.setVerticalGroup(
+            jpnBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnBebidasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(lblSelectBebida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jFormattedTextFieldQtde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jFormattedTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jpnBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblQtde)
+                    .addComponent(ftxtQtde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPreco)
+                    .addComponent(jftxtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpnBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRemoveBebida)
                     .addComponent(btnAddBebida))
                 .addGap(18, 18, Short.MAX_VALUE)
@@ -490,7 +438,116 @@ public class JCadChurrasco extends JPanel {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Bebidas", jPanel2);
+        jTabbedPane1.addTab("Bebidas", jpnBebidas);
+
+        lblSelectCarne.setText("Carne");
+
+        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listCarnes, cbxCarnes);
+        bindingGroup.addBinding(jComboBoxBinding);
+
+        lblQtde1.setText("Quantidade");
+
+        ftxtQtdeCarne.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        jftxtPriceCarne.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        jftxtPriceCarne.addFocusListener(formListener);
+
+        lblPriceCarne.setText("Preço");
+
+        btnRemoveCarne.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/op_remove.png"))); // NOI18N
+        btnRemoveCarne.setText("Remover");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCarnes, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), btnRemoveCarne, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        btnAddCarne.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/op_add.png"))); // NOI18N
+        btnAddCarne.setText("Adicionar");
+        btnAddCarne.addActionListener(formListener);
+
+        eLProperty = org.jdesktop.beansbinding.ELProperty.create("${selectedElement.carnesUtilizadas}");
+        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblChurrascos, eLProperty, tblCarnes);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idCarneUtilizada}"));
+        columnBinding.setColumnName("Código");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${carne}"));
+        columnBinding.setColumnName("Carne");
+        columnBinding.setColumnClass(model.Carne.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${carne.preco}"));
+        columnBinding.setColumnName("Preço");
+        columnBinding.setColumnClass(java.math.BigDecimal.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${quantidade}"));
+        columnBinding.setColumnName("Quantidade");
+        columnBinding.setColumnClass(Float.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${precoTotal}"));
+        columnBinding.setColumnName("Preço Total");
+        columnBinding.setColumnClass(Float.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane5.setViewportView(tblCarnes);
+        if (tblCarnes.getColumnModel().getColumnCount() > 0) {
+            tblCarnes.getColumnModel().getColumn(4).setCellRenderer(precoRenderer1);
+        }
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblSelectCarne)
+                                    .addComponent(cbxCarnes, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lblQtde1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ftxtQtdeCarne, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lblPriceCarne)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jftxtPriceCarne, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(precoRenderer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRemoveCarne)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAddCarne)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSelectCarne)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxCarnes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblQtde1)
+                    .addComponent(ftxtQtdeCarne, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPriceCarne)
+                    .addComponent(jftxtPriceCarne, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(precoRenderer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnRemoveCarne)
+                        .addComponent(btnAddCarne)))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Carnes", jPanel1);
+
+        jlbllogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/churrasco_cadastro.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -498,23 +555,24 @@ public class JCadChurrasco extends JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanelHeaderTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTabbedPane1)))
+                .addComponent(jpnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlbllogo)
+                .addGap(287, 287, 287))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelHeaderTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlbllogo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jpnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addComponent(jTabbedPane1)))
         );
@@ -524,7 +582,7 @@ public class JCadChurrasco extends JPanel {
 
     // Code for dispatching events from components to event handlers.
 
-    private class FormListener implements java.awt.event.ActionListener, java.awt.event.FocusListener {
+    private class FormListener implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.MouseListener {
         FormListener() {}
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             if (evt.getSource() == refreshButton) {
@@ -539,20 +597,17 @@ public class JCadChurrasco extends JPanel {
             else if (evt.getSource() == deleteButton) {
                 JCadChurrasco.this.deleteButtonActionPerformed(evt);
             }
-            else if (evt.getSource() == jFormattedHora) {
-                JCadChurrasco.this.jFormattedHoraActionPerformed(evt);
-            }
             else if (evt.getSource() == btnRemoveConvidado) {
                 JCadChurrasco.this.btnRemoveConvidadoActionPerformed(evt);
             }
-            else if (evt.getSource() == btnConvidar) {
-                JCadChurrasco.this.btnConvidarActionPerformed(evt);
-            }
-            else if (evt.getSource() == btnMais) {
-                JCadChurrasco.this.btnMaisActionPerformed(evt);
+            else if (evt.getSource() == btnAddConvidado) {
+                JCadChurrasco.this.btnAddConvidadoActionPerformed(evt);
             }
             else if (evt.getSource() == btnAddBebida) {
                 JCadChurrasco.this.btnAddBebidaActionPerformed(evt);
+            }
+            else if (evt.getSource() == btnAddCarne) {
+                JCadChurrasco.this.btnAddCarneActionPerformed(evt);
             }
         }
 
@@ -560,9 +615,30 @@ public class JCadChurrasco extends JPanel {
         }
 
         public void focusLost(java.awt.event.FocusEvent evt) {
-            if (evt.getSource() == jFormattedTextFieldPrice) {
-                JCadChurrasco.this.jFormattedTextFieldPriceFocusLost(evt);
+            if (evt.getSource() == jftxtPrice) {
+                JCadChurrasco.this.jftxtPriceFocusLost(evt);
             }
+            else if (evt.getSource() == jftxtPriceCarne) {
+                JCadChurrasco.this.jftxtPriceCarneFocusLost(evt);
+            }
+        }
+
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            if (evt.getSource() == tblChurrascos) {
+                JCadChurrasco.this.tblChurrascosMouseClicked(evt);
+            }
+        }
+
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+        }
+
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+        }
+
+        public void mousePressed(java.awt.event.MouseEvent evt) {
+        }
+
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
         }
     }// </editor-fold>//GEN-END:initComponents
 
@@ -576,6 +652,11 @@ public class JCadChurrasco extends JPanel {
         }
         listChurrascos.clear();
         listChurrascos.addAll(data);
+        
+        // Oculta as abas de JTabbedPane
+        jTabbedPane1.setEnabledAt(1, false);
+        jTabbedPane1.setEnabledAt(2, false);
+        jTabbedPane1.setEnabledAt(3, false);
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -585,14 +666,16 @@ public class JCadChurrasco extends JPanel {
         if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Pergunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 
             // Se a opçao do usuário for YES, executar os comandos abaixo.
-            int[] selected = masterTableChurrasco.getSelectedRows();
+            int[] selected = tblChurrascos.getSelectedRows();
             List<model.Churrasco> toRemove = new ArrayList<model.Churrasco>(selected.length);
             for (int idx = 0; idx < selected.length; idx++) {
-                model.Churrasco c = listChurrascos.get(masterTableChurrasco.convertRowIndexToModel(selected[idx]));
+                model.Churrasco c = listChurrascos.get(tblChurrascos.convertRowIndexToModel(selected[idx]));
                 toRemove.add(c);
                 entityManager.remove(c);
             }
             listChurrascos.removeAll(toRemove);
+            
+            saveButton.doClick();
 
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
@@ -602,8 +685,8 @@ public class JCadChurrasco extends JPanel {
         entityManager.persist(c);
         listChurrascos.add(c);
         int row = listChurrascos.size() - 1;
-        masterTableChurrasco.setRowSelectionInterval(row, row);
-        masterTableChurrasco.scrollRectToVisible(masterTableChurrasco.getCellRect(row, 0, true));
+        tblChurrascos.setRowSelectionInterval(row, row);
+        tblChurrascos.scrollRectToVisible(tblChurrascos.getCellRect(row, 0, true));
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -611,7 +694,7 @@ public class JCadChurrasco extends JPanel {
             entityManager.getTransaction().commit();
             entityManager.getTransaction().begin();
             // Janela para confirmar o Salvamento
-            JOptionPane.showMessageDialog(null, "Registro salvo com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Registro atualizado", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (RollbackException rex) {
             rex.printStackTrace();
@@ -625,37 +708,33 @@ public class JCadChurrasco extends JPanel {
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void jFormattedHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedHoraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedHoraActionPerformed
-
-    private void btnConvidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConvidarActionPerformed
+    private void btnAddConvidadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddConvidadoActionPerformed
 
         // Este método faz o relacionamento muito para muitos: adiciona Convidado a Churrasco e Churraco a Convidado
-        int rowChurrasco = masterTableChurrasco.getSelectedRow();
+        int rowChurrasco = tblChurrascos.getSelectedRow();
         Churrasco churrasco = listChurrascos.get(rowChurrasco);
-        Convidado convidado = (Convidado) jComboBoxConvidados.getSelectedItem();
+        Convidado convidado = (Convidado) cbxConvidados.getSelectedItem();
         churrasco.addConvidado(convidado);
         convidado.addChurrasco(churrasco);
 
-        atualizarTabelaConvidado(rowChurrasco);
-
         int ultimaLinhaConvidado = churrasco.sizeOfConvidado() - 1;
-        jTableConvidadosChurrasco.setRowSelectionInterval(ultimaLinhaConvidado, ultimaLinhaConvidado);
-        jTableConvidadosChurrasco.scrollRectToVisible(jTableConvidadosChurrasco.getCellRect(ultimaLinhaConvidado, 0, true));
-
+        tblConvidados.setRowSelectionInterval(ultimaLinhaConvidado, ultimaLinhaConvidado);
+        tblConvidados.scrollRectToVisible(tblConvidados.getCellRect(ultimaLinhaConvidado, 0, true));
+        
+        atualizarTabelaConvidado(rowChurrasco);
+        
         saveButton.doClick();
-    }//GEN-LAST:event_btnConvidarActionPerformed
+    }//GEN-LAST:event_btnAddConvidadoActionPerformed
 
     private void atualizarTabelaConvidado(int rowChurrasco) {
-        masterTableChurrasco.clearSelection(); // limpa a tabela de churrascos
-        if (masterTableChurrasco.getRowCount() > 0) {
-            int ultima = masterTableChurrasco.getRowCount() - 1;
-            masterTableChurrasco.setRowSelectionInterval(0, 0);
-            masterTableChurrasco.setRowSelectionInterval(ultima, ultima);
+        tblChurrascos.clearSelection(); // limpa a tabela de churrascos
+        if (tblChurrascos.getRowCount() > 0) {
+            int ultima = tblChurrascos.getRowCount() - 1;
+            tblChurrascos.setRowSelectionInterval(0, 0);
+            tblChurrascos.setRowSelectionInterval(ultima, ultima);
         }
         // Este código serve para manter a última linha da tabela selecioanada
-        masterTableChurrasco.setRowSelectionInterval(rowChurrasco, rowChurrasco);
+        tblChurrascos.setRowSelectionInterval(rowChurrasco, rowChurrasco);
     }
 
     private void btnRemoveConvidadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveConvidadoActionPerformed
@@ -669,56 +748,29 @@ public class JCadChurrasco extends JPanel {
         // 0 = Botao 1 YES, 1 = Botao 2 NO
         if (JOptionPane.showConfirmDialog(null, "Deseja remover convidado do Churrasco?", "Confirmaçao",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 0) {
-            
+
             // Obtém o Churrasco
-            int churrascoSelecionado = jTableConvidadosChurrasco.getSelectedRow();
+            int churrascoSelecionado = tblChurrascos.getSelectedRow();
             Churrasco churrasco = listChurrascos.get(churrascoSelecionado);
 //            
-           // Obtém o convidado do Churrasco
-            int convidadoSelecionado = jTableConvidadosChurrasco.getSelectedRow();
+            // Obtém o convidado do Churrasco
+            int convidadoSelecionado = tblConvidados.getSelectedRow();
             Convidado convidado = churrasco.getConvidado(convidadoSelecionado);
 
             churrasco.removeConvidado(convidado);
             convidado.removeChurrasco(churrasco);
-//            
-//        // NAO ESTÁ FUNCIONANDO A REMOÇAO EM MASSA
-//          
-//            int[] convidadoSelecionados = jTableConvidadosChurrasco.getSelectedRows();
-//            List<Convidado> toRemover = new ArrayList<>();
-//
-//       
-//            // adicionando elementos para remover na variavel composta toRemover
-//            for (int i = 0; i <= convidadoSelecionados.length; i++) {
-//                Convidado convidado = churrasco.getConvidado(convidadoSelecionados[i]);
-//                toRemover.add(convidado);
-//            }
-//
-//            // Processando a fila de remoçao.
-//            //churrasco.getConvidados().removeAll(toRemover);
-//           for (Convidado convidado : toRemover) {
-//                churrasco.removeConvidado(convidado);
-//                convidado.removeChurrasco(churrasco);
-//            }
-
-            atualizarTabelaConvidado(churrascoSelecionado);
 
             saveButton.doClick();
+            
+            atualizarTabelaConvidado(churrascoSelecionado);
         }
 
     }//GEN-LAST:event_btnRemoveConvidadoActionPerformed
 
-    private void btnMaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaisActionPerformed
-        // TODO add your handling code here:
-        JDialogSelecionaConvidados jdl = new JDialogSelecionaConvidados(null, true);
-        jdl.setVisible(true);
-
-
-    }//GEN-LAST:event_btnMaisActionPerformed
-
-    private void jFormattedTextFieldPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextFieldPriceFocusLost
+    private void jftxtPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jftxtPriceFocusLost
         // TODO add your handling code here:
         // String valor será obtido do campo digitado
-        String sv = jFormattedTextFieldPrice.getText();
+        String sv = jftxtPrice.getText();
         // Faz as devidas substituiçoes e limpeza no texto obtido do usuário 
         String vsf = sv.replace("R$", "").replace(" ", "").replace(".", "").replace(",", ".");
         // Um novo objeto da classe BigDecimal é instanciado com o valor da String limpa
@@ -726,31 +778,33 @@ public class JCadChurrasco extends JPanel {
         // Formataçao da moeda para o novo local instanciado com o parametro pt.BR
         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         String valorFormatado = nf.format(valor);
-        jFormattedTextFieldPrice.setText(valorFormatado);
+        jftxtPrice.setText(valorFormatado);
 
-//        int index = jTableBebidas.getSelectedRow();
-//        BebidaUtilizada b = listBebidaUtilizada.get(index);
-//        // passando o valor já como BigDecimal
-//        b.setPreco(valor);
-    }//GEN-LAST:event_jFormattedTextFieldPriceFocusLost
+        int index = tblBebidas.getSelectedRow();
+        Bebida b = listBebidas.get(index);
+        // passando o valor já como BigDecimal
+        b.setPreco(valor);
+    }//GEN-LAST:event_jftxtPriceFocusLost
 
     private void btnAddBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBebidaActionPerformed
         // TODO add your handling code here:
         
         /**
-         * O métodos que faz o tratamento de formatos de moeda e adiciona as associaçoes entre Bebida Utiizada e Churrasco 
+         * O métodos que faz o tratamento de formatos de moeda e adiciona as associaçoes entre Bebida Utilizada e Churrasco 
          */
         BebidaUtilizada bebidaUtilizada = new BebidaUtilizada();
-        Bebida bebida = (Bebida) jComboBoxBebidas.getSelectedItem();
-        Long quantidade = (Long) jFormattedTextFieldQtde.getValue();
-        String sv = jFormattedTextFieldPrice.getValue().toString();
+        Bebida bebida = (Bebida) cbxBebidas.getSelectedItem();
+        Long quantidade = (Long) ftxtQtde.getValue();
+        String sv = jftxtPrice.getValue().toString();
         BigDecimal precoUnitario = new BigDecimal(sv);
+        
+        // Associaçao entre Churrasco e Bebida Utilizada. 
         
         bebidaUtilizada.setBebida(bebida);
         bebidaUtilizada.setPrecoItem(precoUnitario);
         bebidaUtilizada.setQuantidade(quantidade.floatValue());
         
-        int linhaChurrasco = masterTableChurrasco.getSelectedRow();
+        int linhaChurrasco = tblChurrascos.getSelectedRow();
         Churrasco churrasco = listChurrascos.get(linhaChurrasco);
         
         churrasco.addBebidaUtilizada(bebidaUtilizada);
@@ -758,66 +812,110 @@ public class JCadChurrasco extends JPanel {
         
         entityManager.persist(bebidaUtilizada);
         
-        atualizarTabelaConvidado(linhaChurrasco);
-        
         saveButton.doClick();
+        
+        atualizarTabelaConvidado(linhaChurrasco);
 
         
     }//GEN-LAST:event_btnAddBebidaActionPerformed
 
+    private void jftxtPriceCarneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jftxtPriceCarneFocusLost
+        // TODO add your handling code here:
+        // String valor será obtido do campo digitado
+        String sv = jftxtPriceCarne.getText();
+        // Faz as devidas substituiçoes e limpeza no texto obtido do usuário 
+        String vsf = sv.replace("R$", "").replace(" ", "").replace(".", "").replace(",", ".");
+        // Um novo objeto da classe BigDecimal é instanciado com o valor da String limpa
+        BigDecimal valor = new BigDecimal(vsf);
+        // Formataçao da moeda para o novo local instanciado com o parametro pt.BR
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valorFormatado = nf.format(valor);
+        jftxtPriceCarne.setText(valorFormatado);
+
+        int index = tblBebidas.getSelectedRow();
+        Bebida b = listBebidas.get(index);
+        // passando o valor já como BigDecimal
+        b.setPreco(valor);
+    }//GEN-LAST:event_jftxtPriceCarneFocusLost
+
+    private void btnAddCarneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCarneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddCarneActionPerformed
+
+    private void tblChurrascosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChurrascosMouseClicked
+        // TODO add your handling code here:
+        // Código para habilitar as outras abas assim que um churrasco for selecionado
+        if(tblChurrascos.getSelectedRow()>= 0){
+            jTabbedPane1.setEnabledAt(1, true);
+            jTabbedPane1.setEnabledAt(2, true);
+            jTabbedPane1.setEnabledAt(3, true);
+        }else{
+            jTabbedPane1.setEnabledAt(1, false);
+            jTabbedPane1.setEnabledAt(2, false);
+            jTabbedPane1.setEnabledAt(3, false);
+        }
+    }//GEN-LAST:event_tblChurrascosMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddBebida;
-    private javax.swing.JButton btnConvidar;
-    private javax.swing.JButton btnMais;
+    private javax.swing.JButton btnAddCarne;
+    private javax.swing.JButton btnAddConvidado;
     private javax.swing.JButton btnRemoveBebida;
+    private javax.swing.JButton btnRemoveCarne;
     private javax.swing.JButton btnRemoveConvidado;
-    private javax.swing.JLabel dataLabel;
+    private javax.swing.JComboBox<String> cbxBebidas;
+    private javax.swing.JComboBox<String> cbxCarnes;
+    private javax.swing.JComboBox cbxConvidados;
     private javax.swing.JButton deleteButton;
     private javax.persistence.EntityManager entityManager;
-    private javax.swing.JLabel horaLabel;
-    private javax.swing.JTextField idchurrascoField;
-    private javax.swing.JLabel idchurrascoLabel;
-    private javax.swing.JComboBox<String> jComboBoxBebidas;
-    private javax.swing.JComboBox jComboBoxConvidados;
-    private javax.swing.JFormattedTextField jFormattedData;
-    private javax.swing.JFormattedTextField jFormattedHora;
-    private javax.swing.JFormattedTextField jFormattedTextFieldPrice;
-    private javax.swing.JFormattedTextField jFormattedTextFieldQtde;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JFormattedTextField ftxtData;
+    private javax.swing.JFormattedTextField ftxtHora;
+    private javax.swing.JFormattedTextField ftxtQtde;
+    private javax.swing.JFormattedTextField ftxtQtdeCarne;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanelButtons;
-    private javax.swing.JPanel jPanelFormTabela;
-    private javax.swing.JPanel jPanelFormularioCadastroChurrasco;
-    private javax.swing.JPanel jPanelHeaderTitle;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTableBebidas;
-    private javax.swing.JTable jTableConvidadosChurrasco;
-    private java.util.List<model.Bebida> listBebida;
+    private javax.swing.JFormattedTextField jftxtPrice;
+    private javax.swing.JFormattedTextField jftxtPriceCarne;
+    private javax.swing.JLabel jlbllogo;
+    private javax.swing.JPanel jpnBebidas;
+    private javax.swing.JPanel jpnButtons;
+    private javax.swing.JPanel jpnChurrasco;
+    private javax.swing.JPanel jpnConvidados;
+    private javax.swing.JLabel lblData;
+    private javax.swing.JLabel lblHora;
+    private javax.swing.JLabel lblIdchurrasco;
+    private javax.swing.JLabel lblLocal;
+    private javax.swing.JLabel lblPreco;
+    private javax.swing.JLabel lblPriceCarne;
+    private javax.swing.JLabel lblQtde;
+    private javax.swing.JLabel lblQtde1;
+    private javax.swing.JLabel lblSelecione;
+    private javax.swing.JLabel lblSelectBebida;
+    private javax.swing.JLabel lblSelectCarne;
+    private java.util.List<model.Bebida> listBebidas;
+    private java.util.List<model.Carne> listCarnes;
     private java.util.List<model.Churrasco> listChurrascos;
     private java.util.List<model.Convidado> listConvidados;
-    private javax.swing.JTextField localField;
-    private javax.swing.JLabel localLabel;
-    private javax.swing.JScrollPane masterScrollPaneTabelaChurrasco;
-    private javax.swing.JTable masterTableChurrasco;
     private javax.swing.JButton newButton;
+    private util.PrecoRenderer precoRenderer1;
     private javax.persistence.Query queryBebida;
+    private javax.persistence.Query queryCarne;
     private javax.persistence.Query queryChurrasco;
-    private javax.persistence.Query queryConvidados;
+    private javax.persistence.Query queryConvidado;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton saveButton;
+    private javax.swing.JScrollPane scrollPaneChurrasco;
+    private javax.swing.JTable tblBebidas;
+    private javax.swing.JTable tblCarnes;
+    private javax.swing.JTable tblChurrascos;
+    private javax.swing.JTable tblConvidados;
     private util.TimeRenderer timeRenderer1;
+    private javax.swing.JTextField txtIdchurrasco;
+    private javax.swing.JTextField txtLocal;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
     public static void main(String[] args) {
@@ -828,7 +926,7 @@ public class JCadChurrasco extends JPanel {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

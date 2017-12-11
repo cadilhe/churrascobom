@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
   <persistence-unit name="churrascobomPU" transaction-type="RESOURCE_LOCAL">
-      
     <!-- Provedor do JPA: Hibernate V 4.2.21 Final
       https://docs.jboss.org/hibernate/orm/3.3/reference/pt-BR/html/session-configuration.html -->
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    
     <!-- Classes persistidas -->
     <class>model.Bebida</class>
     <class>model.Carne</class>
@@ -14,29 +12,21 @@
     <class>model.Usuario</class>
     <class>model.BebidaUtilizada</class>
     <class>model.CarneUtilizada</class>
-    
     <properties>
-        <!-- Configuraçoes de conexao JDBC -->
+      <!-- Configuraçoes de conexao JDBC -->
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/churrascobom?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="kin132864"/>
-      
       <!-- Exibir a saída SQL -->
       <property name="hibernate.show_sql" value="false"/>
-      
       <!-- Formatar a saida SQL -->
       <property name="hibernate.format_sql" value="false"/>
-      
       <!-- O que fazer com as definiçoes de dados existentes -->
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
-      
       <!-- Selecionar o dialeto do nosso SQL -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-      
       <!-- Set the current session context -->
-      <property name="current_session_context_class" value="thread" />
-      
+      <property name="current_session_context_class" value="thread"/>
     </properties>
   </persistence-unit>
 </persistence>

@@ -52,4 +52,12 @@ TO DO LIST
 - Corrigir Cadastro de usuário - login e senha (Aula 11)
 - Corrigir a Remoçao de Convidados do Churrasco (Aula 20)
 
+Projeto
+- Como separar logic de views
+
+
+Operaçao
+
+
+
 

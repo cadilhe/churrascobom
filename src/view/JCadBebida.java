@@ -57,9 +57,9 @@ public class JCadBebida extends JPanel {
         descricaoField = new javax.swing.JTextField();
         precoLabel = new javax.swing.JLabel();
         precoRenderer1 = new util.PrecoRenderer();
-        jFormattedPrecoBebida = new javax.swing.JFormattedTextField();
+        jftxtPrice = new javax.swing.JFormattedTextField();
         masterScrollPane = new javax.swing.JScrollPane();
-        masterTable = new javax.swing.JTable();
+        jtblBebidas = new javax.swing.JTable();
         jPanelButtons = new javax.swing.JPanel();
         deleteButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
@@ -91,10 +91,10 @@ public class JCadBebida extends JPanel {
 
         jPanelCampos.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados da Bebida"));
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nome}"), nomeField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jtblBebidas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nome}"), nomeField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("null");
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), nomeField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, jtblBebidas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), nomeField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         descricaoLabel.setText("Descriçao");
@@ -102,10 +102,10 @@ public class JCadBebida extends JPanel {
 
         idbebidaField.setEditable(false);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idbebida}"), idbebidaField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jtblBebidas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idbebida}"), idbebidaField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("null");
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), idbebidaField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, jtblBebidas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), idbebidaField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         idbebidaField.addActionListener(formListener);
@@ -114,23 +114,23 @@ public class JCadBebida extends JPanel {
 
         idbebidaLabel.setText("Código");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.descricao}"), descricaoField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jtblBebidas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.descricao}"), descricaoField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("null");
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), descricaoField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, jtblBebidas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), descricaoField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         precoLabel.setText("Preço:");
 
-        jFormattedPrecoBebida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        jftxtPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.preco}"), jFormattedPrecoBebida, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jtblBebidas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.preco}"), jftxtPrice, org.jdesktop.beansbinding.BeanProperty.create("value"));
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jFormattedPrecoBebida, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jtblBebidas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jftxtPrice, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        jFormattedPrecoBebida.addFocusListener(formListener);
-        jFormattedPrecoBebida.addActionListener(formListener);
+        jftxtPrice.addFocusListener(formListener);
+        jftxtPrice.addActionListener(formListener);
 
         javax.swing.GroupLayout jPanelCamposLayout = new javax.swing.GroupLayout(jPanelCampos);
         jPanelCampos.setLayout(jPanelCamposLayout);
@@ -154,7 +154,7 @@ public class JCadBebida extends JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCamposLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jFormattedPrecoBebida)
+                .addComponent(jftxtPrice)
                 .addGap(12, 12, 12))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCamposLayout.createSequentialGroup()
                 .addContainerGap()
@@ -183,13 +183,13 @@ public class JCadBebida extends JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(precoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedPrecoBebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jftxtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(precoRenderer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, masterTable);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, jtblBebidas);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idbebida}"));
         columnBinding.setColumnName("Código");
         columnBinding.setColumnClass(Integer.class);
@@ -205,17 +205,17 @@ public class JCadBebida extends JPanel {
         columnBinding.setColumnClass(java.math.BigDecimal.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-        masterTable.addMouseListener(formListener);
-        masterScrollPane.setViewportView(masterTable);
-        if (masterTable.getColumnModel().getColumnCount() > 0) {
-            masterTable.getColumnModel().getColumn(3).setCellRenderer(precoRenderer1);
+        jtblBebidas.addMouseListener(formListener);
+        masterScrollPane.setViewportView(jtblBebidas);
+        if (jtblBebidas.getColumnModel().getColumnCount() > 0) {
+            jtblBebidas.getColumnModel().getColumn(3).setCellRenderer(precoRenderer1);
         }
 
         deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bebida_remove.png"))); // NOI18N
         deleteButton.setText("Excluir");
         deleteButton.setInheritsPopupMenu(true);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), deleteButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, jtblBebidas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), deleteButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         deleteButton.addActionListener(formListener);
@@ -305,8 +305,8 @@ public class JCadBebida extends JPanel {
             if (evt.getSource() == idbebidaField) {
                 JCadBebida.this.idbebidaFieldActionPerformed(evt);
             }
-            else if (evt.getSource() == jFormattedPrecoBebida) {
-                JCadBebida.this.jFormattedPrecoBebidaActionPerformed(evt);
+            else if (evt.getSource() == jftxtPrice) {
+                JCadBebida.this.jftxtPriceActionPerformed(evt);
             }
             else if (evt.getSource() == deleteButton) {
                 JCadBebida.this.deleteButtonActionPerformed(evt);
@@ -326,14 +326,14 @@ public class JCadBebida extends JPanel {
         }
 
         public void focusLost(java.awt.event.FocusEvent evt) {
-            if (evt.getSource() == jFormattedPrecoBebida) {
-                JCadBebida.this.jFormattedPrecoBebidaFocusLost(evt);
+            if (evt.getSource() == jftxtPrice) {
+                JCadBebida.this.jftxtPriceFocusLost(evt);
             }
         }
 
         public void mouseClicked(java.awt.event.MouseEvent evt) {
-            if (evt.getSource() == masterTable) {
-                JCadBebida.this.masterTableMouseClicked(evt);
+            if (evt.getSource() == jtblBebidas) {
+                JCadBebida.this.jtblBebidasMouseClicked(evt);
             }
         }
 
@@ -368,10 +368,10 @@ public class JCadBebida extends JPanel {
         if (JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Pergunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 
             // Se a opçao do usuário for YES, executar os comandos abaixo.
-            int[] selected = masterTable.getSelectedRows(); // Cria um vetor que vai receber as linhas selecionadas
+            int[] selected = jtblBebidas.getSelectedRows(); // Cria um vetor que vai receber as linhas selecionadas
             List<model.Bebida> toRemove = new ArrayList<model.Bebida>(selected.length); // Nova lista das linhas selecionadas
             for (int idx = 0; idx < selected.length; idx++) {
-                model.Bebida b = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+                model.Bebida b = list.get(jtblBebidas.convertRowIndexToModel(selected[idx]));
                 toRemove.add(b); // adiciona os elementos selecionados na lista dos removíveis
                 entityManager.remove(b);
             }
@@ -389,8 +389,8 @@ public class JCadBebida extends JPanel {
         entityManager.persist(b);
         list.add(b);
         int row = list.size() - 1;
-        masterTable.setRowSelectionInterval(row, row);
-        masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
+        jtblBebidas.setRowSelectionInterval(row, row);
+        jtblBebidas.scrollRectToVisible(jtblBebidas.getCellRect(row, 0, true));
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -398,7 +398,7 @@ public class JCadBebida extends JPanel {
             entityManager.getTransaction().commit();
             entityManager.getTransaction().begin();
             // Janela para confirmar o Salvamento            
-            JOptionPane.showMessageDialog(null, "Registro salvo com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Operação realizada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (RollbackException rex) {
             rex.printStackTrace();
@@ -416,10 +416,10 @@ public class JCadBebida extends JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_idbebidaFieldActionPerformed
 
-    private void jFormattedPrecoBebidaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedPrecoBebidaFocusLost
+    private void jftxtPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jftxtPriceFocusLost
         // TODO add your handling code here:
         // String valor será obtido do campo digitado
-        String sv = jFormattedPrecoBebida.getText();
+        String sv = jftxtPrice.getText();
         // Faz as devidas substituiçoes e limpeza no texto obtido do usuário 
         String vsf = sv.replace("R$", "").replace(" ", "").replace(".", "").replace(",", ".");
         // Um novo objeto da classe BigDecimal é instanciado com o valor da String limpa
@@ -427,28 +427,28 @@ public class JCadBebida extends JPanel {
         // Formataçao da moeda para o novo local instanciado com o parametro pt.BR
         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         String valorFormatado = nf.format(valor);
-        jFormattedPrecoBebida.setText(valorFormatado);
+        jftxtPrice.setText(valorFormatado);
 
-        int index = masterTable.getSelectedRow();
+        int index = jtblBebidas.getSelectedRow();
         Bebida b = list.get(index);
         // passando o valor já como BigDecimal
         b.setPreco(valor);
-    }//GEN-LAST:event_jFormattedPrecoBebidaFocusLost
+    }//GEN-LAST:event_jftxtPriceFocusLost
 
 // Ao clicar na linha de preço na tabela, exibir o preço formatado para a moeda local no campo de preço
-    private void masterTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_masterTableMouseClicked
-        int row = masterTable.getSelectedRow();
+    private void jtblBebidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblBebidasMouseClicked
+        int row = jtblBebidas.getSelectedRow();
         if (row >= 0) {
             NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-            String v = masterTable.getValueAt(row, 3).toString();
-            jFormattedPrecoBebida.setText(nf.format(new BigDecimal(v)));
+            String v = jtblBebidas.getValueAt(row, 3).toString();
+            jftxtPrice.setText(nf.format(new BigDecimal(v)));
         }
 
-    }//GEN-LAST:event_masterTableMouseClicked
+    }//GEN-LAST:event_jtblBebidasMouseClicked
 
-    private void jFormattedPrecoBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedPrecoBebidaActionPerformed
+    private void jftxtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jftxtPriceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedPrecoBebidaActionPerformed
+    }//GEN-LAST:event_jftxtPriceActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -458,14 +458,14 @@ public class JCadBebida extends JPanel {
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JTextField idbebidaField;
     private javax.swing.JLabel idbebidaLabel;
-    private javax.swing.JFormattedTextField jFormattedPrecoBebida;
     private javax.swing.JPanel jPanelButtons;
     private javax.swing.JPanel jPanelCadastroBebidas;
     private javax.swing.JPanel jPanelCampos;
+    private javax.swing.JFormattedTextField jftxtPrice;
+    private javax.swing.JTable jtblBebidas;
     private javax.swing.JLabel lblCadastroBebida;
     private java.util.List<model.Bebida> list;
     private javax.swing.JScrollPane masterScrollPane;
-    private javax.swing.JTable masterTable;
     private javax.swing.JButton newButton;
     private javax.swing.JTextField nomeField;
     private javax.swing.JLabel nomeLabel;
