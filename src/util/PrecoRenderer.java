@@ -23,6 +23,10 @@ public class PrecoRenderer extends DefaultTableCellRenderer {
         if (value instanceof BigDecimal) {
             this.setText(nf.format((BigDecimal) value));
         }
+        
+        if (value instanceof Float) {
+            this.setText(nf.format((Float) value));
+        }
 
         return this;
     }

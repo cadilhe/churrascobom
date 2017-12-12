@@ -362,20 +362,26 @@ public class JCadChurrasco extends JPanel {
         eLProperty = org.jdesktop.beansbinding.ELProperty.create("${selectedElement.bebidasUtilizadas}");
         jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblChurrascos, eLProperty, tblBebidas);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idBebidaUtilizada}"));
-        columnBinding.setColumnName("Id Bebida Utilizada");
+        columnBinding.setColumnName("Código");
         columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bebida}"));
         columnBinding.setColumnName("Bebida");
         columnBinding.setColumnClass(model.Bebida.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${precoItem}"));
+        columnBinding.setColumnName("Preço Unitário");
+        columnBinding.setColumnClass(java.math.BigDecimal.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${quantidade}"));
         columnBinding.setColumnName("Quantidade");
         columnBinding.setColumnClass(Float.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${precoTotal}"));
-        columnBinding.setColumnName("Preco Total");
+        columnBinding.setColumnName("Valor Total");
         columnBinding.setColumnClass(Float.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane4.setViewportView(tblBebidas);
+        if (tblBebidas.getColumnModel().getColumnCount() > 0) {
+            tblBebidas.getColumnModel().getColumn(2).setCellRenderer(null);
+        }
 
         btnRemoveBebida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/op_remove.png"))); // NOI18N
         btnRemoveBebida.setText("Remover");
@@ -559,9 +565,9 @@ public class JCadChurrasco extends JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jpnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addGap(6, 6, 6))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jlbllogo)
@@ -606,14 +612,14 @@ public class JCadChurrasco extends JPanel {
             else if (evt.getSource() == btnAddConvidado) {
                 JCadChurrasco.this.btnAddConvidadoActionPerformed(evt);
             }
+            else if (evt.getSource() == btnRemoveBebida) {
+                JCadChurrasco.this.btnRemoveBebidaActionPerformed(evt);
+            }
             else if (evt.getSource() == btnAddBebida) {
                 JCadChurrasco.this.btnAddBebidaActionPerformed(evt);
             }
             else if (evt.getSource() == btnAddCarne) {
                 JCadChurrasco.this.btnAddCarneActionPerformed(evt);
-            }
-            else if (evt.getSource() == btnRemoveBebida) {
-                JCadChurrasco.this.btnRemoveBebidaActionPerformed(evt);
             }
         }
 
@@ -856,6 +862,9 @@ public class JCadChurrasco extends JPanel {
             jTabbedPane1.setEnabledAt(1, true);
             jTabbedPane1.setEnabledAt(2, true);
             jTabbedPane1.setEnabledAt(3, true);
+            // Renderizado colunas para o formato de moeda definido no PrecoRenderer
+            tblBebidas.getColumnModel().getColumn(2).setCellRenderer(precoRenderer1);
+            tblBebidas.getColumnModel().getColumn(4).setCellRenderer(precoRenderer1);
         } else {
             jTabbedPane1.setEnabledAt(1, false);
             jTabbedPane1.setEnabledAt(2, false);
@@ -866,7 +875,7 @@ public class JCadChurrasco extends JPanel {
     private void btnRemoveBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveBebidaActionPerformed
         // TODO add your handling code here:
         // 0 = Botao 1 YES, 1 = Botao 2 NO
-        if (JOptionPane.showConfirmDialog(null, "Deseja remover a bebida Churrasco?", "Confirmaçao",
+        if (JOptionPane.showConfirmDialog(null, "Deseja remover a bebida do Churrasco?", "Confirmaçao",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 0) {
         // Obtém o Churrasco
         int linhaSelecionada = tblChurrascos.getSelectedRow();
