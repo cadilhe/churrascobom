@@ -642,7 +642,7 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="lblPreco" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jftxtPrice" min="-2" pref="283" max="-2" attributes="0"/>
+                                      <Component id="jftxtPriceBebida" min="-2" pref="283" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="btnRemoveBebida" min="-2" max="-2" attributes="0"/>
@@ -668,7 +668,7 @@
                           <Component id="lblQtde" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ftxtQtde" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPreco" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jftxtPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jftxtPriceBebida" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -713,14 +713,14 @@
                 <Property name="text" type="java.lang.String" value="Pre&#xe7;o"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jftxtPrice">
+            <Component class="javax.swing.JFormattedTextField" name="jftxtPriceBebida">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format subtype="0" type="4"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jftxtPriceFocusLost"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jftxtPriceBebidaFocusLost"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane4">
@@ -793,6 +793,9 @@
               <BindingProperties>
                 <BindingProperty name="enabled" source="tblBebidas" sourcePath="${selectedElement != null}" target="btnRemoveBebida" targetPath="enabled" updateStrategy="0" immediately="false"/>
               </BindingProperties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveBebidaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnAddBebida">
               <Properties>

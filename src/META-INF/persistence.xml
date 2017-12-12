@@ -27,6 +27,7 @@
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
       <!-- Set the current session context -->
       <property name="current_session_context_class" value="thread"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
     </properties>
   </persistence-unit>
 </persistence>

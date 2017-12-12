@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Bebida;
 import model.BebidaUtilizada;
+import model.Carne;
 import model.Churrasco;
 import model.Convidado;
 
@@ -89,7 +90,7 @@ public class JCadChurrasco extends JPanel {
         lblQtde = new javax.swing.JLabel();
         ftxtQtde = new javax.swing.JFormattedTextField();
         lblPreco = new javax.swing.JLabel();
-        jftxtPrice = new javax.swing.JFormattedTextField();
+        jftxtPriceBebida = new javax.swing.JFormattedTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblBebidas = new javax.swing.JTable();
         btnRemoveBebida = new javax.swing.JButton();
@@ -355,8 +356,8 @@ public class JCadChurrasco extends JPanel {
 
         lblPreco.setText("Preço");
 
-        jftxtPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
-        jftxtPrice.addFocusListener(formListener);
+        jftxtPriceBebida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        jftxtPriceBebida.addFocusListener(formListener);
 
         eLProperty = org.jdesktop.beansbinding.ELProperty.create("${selectedElement.bebidasUtilizadas}");
         jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblChurrascos, eLProperty, tblBebidas);
@@ -381,6 +382,8 @@ public class JCadChurrasco extends JPanel {
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblBebidas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), btnRemoveBebida, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
+
+        btnRemoveBebida.addActionListener(formListener);
 
         btnAddBebida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/op_add.png"))); // NOI18N
         btnAddBebida.setText("Adicionar");
@@ -409,7 +412,7 @@ public class JCadChurrasco extends JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnBebidasLayout.createSequentialGroup()
                                 .addComponent(lblPreco)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jftxtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jftxtPriceBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnBebidasLayout.createSequentialGroup()
                                 .addComponent(btnRemoveBebida)
                                 .addGap(18, 18, 18)
@@ -428,7 +431,7 @@ public class JCadChurrasco extends JPanel {
                     .addComponent(lblQtde)
                     .addComponent(ftxtQtde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPreco)
-                    .addComponent(jftxtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jftxtPriceBebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jpnBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRemoveBebida)
@@ -609,14 +612,17 @@ public class JCadChurrasco extends JPanel {
             else if (evt.getSource() == btnAddCarne) {
                 JCadChurrasco.this.btnAddCarneActionPerformed(evt);
             }
+            else if (evt.getSource() == btnRemoveBebida) {
+                JCadChurrasco.this.btnRemoveBebidaActionPerformed(evt);
+            }
         }
 
         public void focusGained(java.awt.event.FocusEvent evt) {
         }
 
         public void focusLost(java.awt.event.FocusEvent evt) {
-            if (evt.getSource() == jftxtPrice) {
-                JCadChurrasco.this.jftxtPriceFocusLost(evt);
+            if (evt.getSource() == jftxtPriceBebida) {
+                JCadChurrasco.this.jftxtPriceBebidaFocusLost(evt);
             }
             else if (evt.getSource() == jftxtPriceCarne) {
                 JCadChurrasco.this.jftxtPriceCarneFocusLost(evt);
@@ -652,7 +658,7 @@ public class JCadChurrasco extends JPanel {
         }
         listChurrascos.clear();
         listChurrascos.addAll(data);
-        
+
         // Oculta as abas de JTabbedPane
         jTabbedPane1.setEnabledAt(1, false);
         jTabbedPane1.setEnabledAt(2, false);
@@ -674,7 +680,7 @@ public class JCadChurrasco extends JPanel {
                 entityManager.remove(c);
             }
             listChurrascos.removeAll(toRemove);
-            
+
             saveButton.doClick();
 
         }
@@ -720,13 +726,13 @@ public class JCadChurrasco extends JPanel {
         int ultimaLinhaConvidado = churrasco.sizeOfConvidado() - 1;
         tblConvidados.setRowSelectionInterval(ultimaLinhaConvidado, ultimaLinhaConvidado);
         tblConvidados.scrollRectToVisible(tblConvidados.getCellRect(ultimaLinhaConvidado, 0, true));
-        
-        atualizarTabelaConvidado(rowChurrasco);
-        
-        saveButton.doClick();
+
+        atualizarTabelas(rowChurrasco);
+
+        // saveButton.doClick();
     }//GEN-LAST:event_btnAddConvidadoActionPerformed
 
-    private void atualizarTabelaConvidado(int rowChurrasco) {
+    private void atualizarTabelas(int rowChurrasco) {
         tblChurrascos.clearSelection(); // limpa a tabela de churrascos
         if (tblChurrascos.getRowCount() > 0) {
             int ultima = tblChurrascos.getRowCount() - 1;
@@ -760,17 +766,17 @@ public class JCadChurrasco extends JPanel {
             churrasco.removeConvidado(convidado);
             convidado.removeChurrasco(churrasco);
 
-            saveButton.doClick();
-            
-            atualizarTabelaConvidado(churrascoSelecionado);
+            atualizarTabelas(churrascoSelecionado);
+
+            // saveButton.doClick();
         }
 
     }//GEN-LAST:event_btnRemoveConvidadoActionPerformed
 
-    private void jftxtPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jftxtPriceFocusLost
+    private void jftxtPriceBebidaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jftxtPriceBebidaFocusLost
         // TODO add your handling code here:
         // String valor será obtido do campo digitado
-        String sv = jftxtPrice.getText();
+        String sv = jftxtPriceBebida.getText();
         // Faz as devidas substituiçoes e limpeza no texto obtido do usuário 
         String vsf = sv.replace("R$", "").replace(" ", "").replace(".", "").replace(",", ".");
         // Um novo objeto da classe BigDecimal é instanciado com o valor da String limpa
@@ -778,45 +784,46 @@ public class JCadChurrasco extends JPanel {
         // Formataçao da moeda para o novo local instanciado com o parametro pt.BR
         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         String valorFormatado = nf.format(valor);
-        jftxtPrice.setText(valorFormatado);
+        jftxtPriceBebida.setText(valorFormatado);
 
-        int index = tblBebidas.getSelectedRow();
-        Bebida b = listBebidas.get(index);
-        // passando o valor já como BigDecimal
-        b.setPreco(valor);
-    }//GEN-LAST:event_jftxtPriceFocusLost
+//        int index = tblBebidas.getSelectedRow();
+//        Bebida b = listBebidas.get(index);
+//        // passando o valor já como BigDecimal
+//        b.setPreco(valor);
+    }//GEN-LAST:event_jftxtPriceBebidaFocusLost
 
     private void btnAddBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBebidaActionPerformed
         // TODO add your handling code here:
-        
-        /**
-         * O métodos que faz o tratamento de formatos de moeda e adiciona as associaçoes entre Bebida Utilizada e Churrasco 
-         */
+
         BebidaUtilizada bebidaUtilizada = new BebidaUtilizada();
+
+        // Obtem bebida selecionada do Combobox com a lista de bebidas
         Bebida bebida = (Bebida) cbxBebidas.getSelectedItem();
+
+        // Conversoes de tipos e atribuiçao de valores para cálculo de Preço Total
         Long quantidade = (Long) ftxtQtde.getValue();
-        String sv = jftxtPrice.getValue().toString();
-        BigDecimal precoUnitario = new BigDecimal(sv);
-        
+        String svl = jftxtPriceBebida.getValue().toString();
+        BigDecimal precoUnitario = new BigDecimal(svl);
+
         // Associaçao entre Churrasco e Bebida Utilizada. 
-        
         bebidaUtilizada.setBebida(bebida);
         bebidaUtilizada.setPrecoItem(precoUnitario);
         bebidaUtilizada.setQuantidade(quantidade.floatValue());
-        
+
+        // Pega a linha selecionanda da tabela Churrasco e atribui o seu valor ao objeto churrasco alvo
         int linhaChurrasco = tblChurrascos.getSelectedRow();
         Churrasco churrasco = listChurrascos.get(linhaChurrasco);
-        
+
+        // Adiciona bebida ao objeto churrasco
         churrasco.addBebidaUtilizada(bebidaUtilizada);
         bebidaUtilizada.setChurrasco(churrasco);
-        
-        entityManager.persist(bebidaUtilizada);
-        
-        saveButton.doClick();
-        
-        atualizarTabelaConvidado(linhaChurrasco);
 
-        
+        entityManager.persist(bebidaUtilizada);
+
+        atualizarTabelas(linhaChurrasco);
+
+        // saveButton.doClick();
+
     }//GEN-LAST:event_btnAddBebidaActionPerformed
 
     private void jftxtPriceCarneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jftxtPriceCarneFocusLost
@@ -832,10 +839,10 @@ public class JCadChurrasco extends JPanel {
         String valorFormatado = nf.format(valor);
         jftxtPriceCarne.setText(valorFormatado);
 
-        int index = tblBebidas.getSelectedRow();
-        Bebida b = listBebidas.get(index);
+        int index = tblCarnes.getSelectedRow();
+        Carne c = listCarnes.get(index);
         // passando o valor já como BigDecimal
-        b.setPreco(valor);
+        c.setPreco(valor);
     }//GEN-LAST:event_jftxtPriceCarneFocusLost
 
     private void btnAddCarneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCarneActionPerformed
@@ -845,16 +852,43 @@ public class JCadChurrasco extends JPanel {
     private void tblChurrascosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChurrascosMouseClicked
         // TODO add your handling code here:
         // Código para habilitar as outras abas assim que um churrasco for selecionado
-        if(tblChurrascos.getSelectedRow()>= 0){
+        if (tblChurrascos.getSelectedRow() >= 0) {
             jTabbedPane1.setEnabledAt(1, true);
             jTabbedPane1.setEnabledAt(2, true);
             jTabbedPane1.setEnabledAt(3, true);
-        }else{
+        } else {
             jTabbedPane1.setEnabledAt(1, false);
             jTabbedPane1.setEnabledAt(2, false);
             jTabbedPane1.setEnabledAt(3, false);
         }
     }//GEN-LAST:event_tblChurrascosMouseClicked
+
+    private void btnRemoveBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveBebidaActionPerformed
+        // TODO add your handling code here:
+        // 0 = Botao 1 YES, 1 = Botao 2 NO
+        if (JOptionPane.showConfirmDialog(null, "Deseja remover a bebida Churrasco?", "Confirmaçao",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 0) {
+        // Obtém o Churrasco
+        int linhaSelecionada = tblChurrascos.getSelectedRow();
+        Churrasco churrasco = listChurrascos.get(linhaSelecionada);
+        
+        // Obtém o convidado do Churrasco
+        int linhaBebidaSelecionada = tblBebidas.getSelectedRow();
+        BebidaUtilizada bebidaUtilizada = churrasco.getBebidaUtilizada(linhaBebidaSelecionada);
+
+        // Remove a associação entre churrasco e bebidaUtilizada
+        churrasco.removeBebidaUtilizada(bebidaUtilizada);
+        bebidaUtilizada.setChurrasco(null);
+
+        entityManager.remove(bebidaUtilizada);
+        
+        // saveButton.doClick();
+        
+        atualizarTabelas(linhaSelecionada);        
+        
+    }
+
+    }//GEN-LAST:event_btnRemoveBebidaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -878,7 +912,7 @@ public class JCadChurrasco extends JPanel {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JFormattedTextField jftxtPrice;
+    private javax.swing.JFormattedTextField jftxtPriceBebida;
     private javax.swing.JFormattedTextField jftxtPriceCarne;
     private javax.swing.JLabel jlbllogo;
     private javax.swing.JPanel jpnBebidas;
