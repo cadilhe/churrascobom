@@ -1,5 +1,5 @@
 # churrascobom
-Mais um projeto para a disciplina de BD2 com Hibernate JPA
+Projeto para a disciplina de BD2 com Hibernate JPA
 
 Como usar
 
