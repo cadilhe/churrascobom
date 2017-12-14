@@ -56,8 +56,3 @@ Projeto
 - Como separar logic de views
 
 
-Operaçao
-
-
-
-
