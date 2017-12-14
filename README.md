@@ -5,7 +5,7 @@ Como usar
 
 1 - Criar um banco de dados
 
-2 - Editar o arquivo persistence.xml poara conectcar com o banco criado
+2 - Editar o arquivo persistence.xml poara conectar com o banco criado
 
 3 - Executar o formulário JCadUsuario para criar um  novo usuário administrador do sistema
 
