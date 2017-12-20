@@ -1,7 +1,15 @@
 # churrascobom
-Projeto para a disciplina de BD2 com Hibernate JPA
 
-Como usar
+Laboratório de desenvolvimento de sistema usando Swing e JPA com Hibernate. Este sistema foi desenvolvido seguindo tutorial de videos aulas com o objetivo de aprender essas tecnologias.
+
+** Ferramentas: **
+
+- JDK 1.8
+- MySQL
+- Hibernate 4.3
+- NetBeans IDE
+
+** Como executar o projeto **
 
 1 - Criar um banco de dados
 
