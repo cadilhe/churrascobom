@@ -1,6 +1,6 @@
 # churrascobom
 
-Laboratório de desenvolvimento de sistema usando Swing e JPA com Hibernate. Este sistema foi desenvolvido seguindo tutorial de videos aulas com o objetivo de aprender essas tecnologias.
+Laboratório de desenvolvimento de sistema usando Swing e JPA com Hibernate. Este sistema foi desenvolvido seguindo tutoriais com o objetivo de aprender essas tecnologias.
 
 ** Ferramentas: **
 
